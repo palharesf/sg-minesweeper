@@ -8,6 +8,14 @@ sg-minesweeper is a small project I decided to develop as a personal challenge a
 
 TBD
 
+## Who deserves credit here?
+I would be remiss if I didn't mention a few specific SG members:
+
+- [Carlo](https://www.steamgifts.com/user/Carlo) - For the original idea. It was their suggestion that sparked the bulb in my head and moved me to action
+- [RosimInc](https://www.steamgifts.com/user/rosiminc) - For the SG nono project. Not only I had incredible fun playing it over and over and over, but their project served as the template for mine, both in terms of code as well as deployment
+- [yannbz](https://www.steamgifts.com/user/yannbz) - Similar to RosimInc, but with the Wordle game. Except that I hate Wordle and played their project once hahaha but jokes aside, the project has been quite successful and popular with a segment of the SG community, and I can appreciate and respect that as well
+- [Grogglz](https://www.steamgifts.com/user/Grogglz) - For creating a kind thread that eventually led to Carlo's comment that sparked the whole thing. Without your fun challenge there would be no minesweeper
+
 ## Documentation
 
 - [Changelog](CHANGELOG.md) - Version history
