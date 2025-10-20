@@ -1,0 +1,171 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+}
+
+.container {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  max-width: 600px;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.info-panel {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding: 10px;
+  background: #f5f5f5;
+  border-radius: 5px;
+}
+
+.info-item {
+  font-weight: bold;
+  color: #555;
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background: #667eea;
+  color: white;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background: #5568d3;
+}
+
+#game-board {
+  display: grid;
+  gap: 2px;
+  background: #999;
+  padding: 2px;
+  border-radius: 5px;
+  margin: 0 auto;
+}
+
+.cell {
+  width: 40px;
+  height: 40px;
+  background: #ddd;
+  border: 2px outset #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 18px;
+  user-select: none;
+}
+
+.cell:hover:not(.revealed):not(.flagged) {
+  background: #ccc;
+}
+
+.cell.revealed {
+  background: #f5f5f5;
+  border: 1px solid #999;
+  cursor: default;
+}
+
+.cell.flagged {
+  background: #ffd700;
+}
+
+.cell.mine {
+  background: #ff4444;
+}
+
+.cell.number-1 {
+  color: #0000ff;
+}
+.cell.number-2 {
+  color: #008000;
+}
+.cell.number-3 {
+  color: #ff0000;
+}
+.cell.number-4 {
+  color: #000080;
+}
+.cell.number-5 {
+  color: #800000;
+}
+.cell.number-6 {
+  color: #008080;
+}
+.cell.number-7 {
+  color: #000000;
+}
+.cell.number-8 {
+  color: #808080;
+}
+
+.hidden-content {
+  margin-top: 20px;
+  padding: 15px;
+  background: #e8f5e9;
+  border-radius: 5px;
+  text-align: center;
+  display: none;
+}
+
+.hidden-content.visible {
+  display: block;
+}
+
+.hidden-content h2 {
+  color: #2e7d32;
+  margin-bottom: 10px;
+}
+
+.hidden-content a {
+  color: #1565c0;
+  font-weight: bold;
+  word-break: break-all;
+}
+
+.message {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 18px;
+  font-weight: bold;
+  min-height: 25px;
+}
+
+.message.win {
+  color: #2e7d32;
+}
+
+.message.lose {
+  color: #c62828;
+}
