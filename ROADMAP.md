@@ -7,4 +7,7 @@
 - Patreon / donation / wishlist support
 - Links to the Github and maybe "About / Help" tabs
 - QoL features (research MineSweeper-specific communities)
-- Mobile support
+- Pause timer after x seconds of inactivity
+- Time in minutes and seconds
+- Local storage to keep giveaway revealed
+- Eventually (later, later on) - login and leaderboard

@@ -8,6 +8,13 @@ sg-minesweeper is a small project I decided to develop as a personal challenge a
 
 TBD
 
+To win the game, you need to achieve two conditions: every non-mine square must be revealed, and every mine must be flagged
+
+## Can I play on my phone?
+
+It worked on mine. Short-press for opening squares, long-press to set flags, it should be fine.
+I haven't tried to create a giveaway through my phone, but I don't see why it wouldn't work
+
 ## Who deserves credit here?
 I would be remiss if I didn't mention a few specific SG members:
 
