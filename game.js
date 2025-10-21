@@ -19,8 +19,8 @@ let timer = 0;
 let timerInterval = null;
 let firstClick = true;
 
-// Hidden content (you'll replace this with actual giveaway link)
-const hiddenLink = "https://www.steamgifts.com/giveaway/XXXXX/game-name";
+// Hidden content
+const secret = "https://www.steamgifts.com/giveaway/XXXXX/game-name";
 
 // DOM elements
 const gameBoard = document.getElementById("game-board");
@@ -214,12 +214,19 @@ function handleRightClick(row, col) {
 // Update flag count
 function updateFlagCount() {
   let count = 0;
-  flagged.forEach((row) => row.forEach((f) => (count += f ? 1 : 0)));
+  flagged.forEach(
+    (row) => row.forEach(
+      (f) => (count += f ? 1 : 0)
+    )
+  );
   flagCountEl.textContent = count;
 }
 
 // Check if player won
 function checkWin() {
+  // Two victory conditions: all non-mine cells revealed, and all mines flagged
+
+  // Condition 1: All non-mine cells revealed
   const config = configs[difficultySelect.value];
   let revealedCount = 0;
 
@@ -245,7 +252,7 @@ function endGame(won) {
     messageEl.textContent = "🎉 You won! Congratulations!";
     messageEl.className = "message win";
     hiddenContentEl.classList.add("visible");
-    giveawayLinkEl.href = hiddenLink;
+    giveawayLinkEl.href = secret;
   } else {
     messageEl.textContent = "💥 Game Over! You hit a mine.";
     messageEl.className = "message lose";
