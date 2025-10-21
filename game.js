@@ -209,6 +209,7 @@ function handleRightClick(row, col) {
   }
 
   updateFlagCount();
+  checkWin();
 }
 
 // Update flag count
@@ -238,7 +239,16 @@ function checkWin() {
 
   const totalCells = config.rows * config.cols;
   if (revealedCount === totalCells - config.mines) {
-    endGame(true);
+    // Condition 2: All mines flagged
+    let flaggedCount = 0;
+    for (let i = 0; i < config.rows; i++) {
+      for (let j = 0; j < config.cols; j++) {
+        if (board[i][j] === -1 && flagged[i][j]) flaggedCount++;
+      }
+    }
+    if (flaggedCount === config.mines) {
+      endGame(true);
+    }
   }
 }
 
