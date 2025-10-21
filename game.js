@@ -1,8 +1,11 @@
 // Game configuration
 const configs = {
+  test: { rows: 3, cols: 3, mines: 1 },
   easy: { rows: 8, cols: 8, mines: 10 },
   medium: { rows: 12, cols: 12, mines: 20 },
   hard: { rows: 16, cols: 16, mines: 40 },
+  expert: { rows: 30, cols: 16, mines: 99 },
+  // custom: { rows: 0, cols: 0, mines: 0 },
 };
 
 // Game state
