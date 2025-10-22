@@ -1,3 +1,11 @@
+## version 0.1.0 - 2025-10-22
+- Refactored `game.js` into modular components: `utils.js`, `game-logic.js`, `game-ui.js`, `creator.js`, and `game-init.js`
+- Renamed `index.html` to `game.html` (player page) and created a new `index.html` (creator page).
+- Creator page allows users to select difficulty, provide a reward URL, and generate a shareable game link.
+- Player page parses game configuration from the URL, renders the Minesweeper game, and reveals the reward upon winning.
+- Added `type="module"` to script tags for ES6 module support
+- Updated `style.css` to include styles for both creator and player pages.
+
 ## version 0.0.3 - 2025-10-21
 - Adjusted CSS to prevent background from overextending in the case of very small grids
 
