@@ -3,42 +3,40 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SG Minesweeper</title>
+    <title>SG Minesweeper Creator</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div class="container">
-      <h1>🎮 SG Minesweeper 💣</h1>
+      <h1>🔗 Create Your Minesweeper Challenge 💣</h1>
 
-      <div class="info-panel">
-        <div class="info-item">
-          ⛳ Flags: <span id="flag-count">0</span>/<span id="mine-count">10</span>
-        </div>
-        <div class="info-item">⏱️ Time: <span id="timer">0</span>s</div>
-      </div>
-
-      <div class="controls">
-        <button id="new-game">New Game</button>
-        <select id="difficulty">
+      <div class="creator-form">
+        <label for="difficulty-creator">Select Difficulty:</label>
+        <select id="difficulty-creator">
           <option value="test">Test (3x3, 1 mine)</option>
           <option value="easy">Easy (8x8, 10 mines)</option>
           <option value="medium">Medium (12x12, 20 mines)</option>
           <option value="hard">Hard (16x16, 40 mines)</option>
           <option value="expert">Expert (30x16, 99 mines)</option>
-          <!-- <option value="custom">Custom</option> -->
         </select>
-      </div>
 
-      <div id="game-board"></div>
+        <label for="reward-url">Destination URL (Reward Link):</label>
+        <input
+          type="url"
+          id="reward-url"
+          placeholder="e.g., https://store.steampowered.com/app/XXXXX/"
+          required
+        />
 
-      <div class="message" id="message"></div>
+        <button id="generate-link-btn">Generate Shareable Link</button>
 
-      <div class="hidden-content" id="hidden-content">
-        <h2>🎉 Congratulations! You Won!</h2>
-        <p>Here's your secret:</p>
-        <a href="#" id="giveaway-link" target="_blank">Click to reveal giveaway</a>
+        <div class="generated-link-panel" style="display: none;">
+          <p>Share this link:</p>
+          <input type="text" id="shareable-link" readonly />
+          <button id="copy-link-btn">Copy Link</button>
+        </div>
       </div>
     </div>
-    <link rel="stylesheet" href="style.css" />
-    <script src="game.js"></script>
+    <script src="./js/creator.js" type="module"></script>
   </body>
 </html>
