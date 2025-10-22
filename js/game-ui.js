@@ -33,8 +33,6 @@ const timerEl = document.getElementById("timer");
 const messageEl = document.getElementById("message");
 const hiddenContentEl = document.getElementById("hidden-content");
 const giveawayLinkEl = document.getElementById("giveaway-link");
-const newGameBtn = document.getElementById("new-game");
-const difficultySelect = document.getElementById("difficulty");
 
 export function initGameUI(config, reward) {
   initGameLogic(config, reward);
@@ -44,8 +42,6 @@ export function initGameUI(config, reward) {
   messageEl.textContent = "";
   messageEl.className = "message";
   hiddenContentEl.classList.remove("visible");
-  newGameBtn.addEventListener("click", () => initGameUI(config, reward));
-  difficultySelect.value = Object.keys(configs).find(key => configs[key].rows === config.rows && configs[key].cols === config.cols && configs[key].mines === config.mines) || "easy";
 }
 
 function renderBoard() {
