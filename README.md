@@ -6,9 +6,15 @@ sg-minesweeper is a small project I decided to develop as a personal challenge a
 
 ## How to use it
 
-TBD
+When you land on the main page, you'll be prompted with a difficulty toggle, a secret input box, and a "Generate" button.
+After choosing the difficulty and entering the secret you want to hide, you click the "Generate" button and a link will be generated containing your difficulty parameters and your encoded secret.
 
-To win the game, you need to achieve two conditions: every non-mine square must be revealed, and every mine must be flagged
+The link will bring you to the game page.
+To win the game, you need to achieve two conditions: every non-mine square must be revealed, and every mine must be flagged.
+To reveal a cell, just left-click (or tap on mobile); to flag a cell, right-click (or long-press on mobile).
+If you hit a mine, you have to refresh the page.
+
+Once you've won the game, you'll be able to see the secret that the game's creator hid.
 
 ## Can I play on my phone?
 
