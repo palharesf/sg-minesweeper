@@ -1,6 +1,5 @@
 import { decodeGameConfig } from "./utils.js";
 import { initGameUI } from "./game-ui.js";
-import { configs } from "./game-logic.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const gameConfigData = decodeGameConfig(window.location.hash);

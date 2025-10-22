@@ -1,13 +1,10 @@
 // Handles DOM manipulation and rendering for the Minesweeper game
 
 import {
-  board,
   revealed,
   flagged,
   gameOver,
   gameWon,
-  mineCount,
-  timer,
   isFirstClick,
   setFirstClick,
   gameConfig,
@@ -20,10 +17,8 @@ import {
   startTimerLogic,
   stopTimerLogic,
   getFlagCount,
-  getMineCount,
   getBoard,
   getRevealed,
-  getFlagged,
 } from "./game-logic.js";
 
 // DOM elements
