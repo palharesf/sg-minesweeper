@@ -171,3 +171,61 @@ button:hover {
 .message.lose {
   color: #c62828;
 }
+
+/* Creator Page Styles */
+.creator-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.creator-form label {
+  font-weight: bold;
+  color: #555;
+}
+
+.creator-form select,
+.creator-form input[type="url"],
+.creator-form input[type="text"] {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 400px; /* Limit width for better readability */
+}
+
+.creator-form button {
+  width: fit-content;
+  align-self: flex-start;
+}
+
+.generated-link-panel {
+  background: #f0f8ff;
+  padding: 15px;
+  border-radius: 5px;
+  margin-top: 20px;
+  border: 1px solid #a7d9ff;
+}
+
+.generated-link-panel p {
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #333;
+}
+
+.generated-link-panel input[type="text"] {
+  background: #e9f5ff;
+  border: 1px solid #87cefa;
+  cursor: text;
+  margin-bottom: 10px;
+}
+
+.generated-link-panel button {
+  background: #2196f3;
+}
+
+.generated-link-panel button:hover {
+  background: #1976d2;
+}
