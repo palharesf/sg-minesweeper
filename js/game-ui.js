@@ -1,0 +1,162 @@
+// Handles DOM manipulation and rendering for the Minesweeper game
+
+import {
+  board,
+  revealed,
+  flagged,
+  gameOver,
+  gameWon,
+  mineCount,
+  timer,
+  firstClick,
+  gameConfig,
+  rewardLink,
+  initGameLogic,
+  placeMines,
+  revealCellLogic,
+  toggleFlagLogic,
+  checkWinLogic,
+  startTimerLogic,
+  stopTimerLogic,
+  getFlagCount,
+  getMineCount,
+  getBoard,
+  getRevealed,
+  getFlagged,
+} from "./game-logic.js";
+
+// DOM elements
+const gameBoardEl = document.getElementById("game-board");
+const flagCountEl = document.getElementById("flag-count");
+const mineCountEl = document.getElementById("mine-count");
+const timerEl = document.getElementById("timer");
+const messageEl = document.getElementById("message");
+const hiddenContentEl = document.getElementById("hidden-content");
+const giveawayLinkEl = document.getElementById("giveaway-link");
+const newGameBtn = document.getElementById("new-game");
+const difficultySelect = document.getElementById("difficulty");
+
+export function initGameUI(config, reward) {
+  initGameLogic(config, reward);
+  renderBoard();
+  updateFlagCountUI();
+  timerEl.textContent = "0";
+  messageEl.textContent = "";
+  messageEl.className = "message";
+  hiddenContentEl.classList.remove("visible");
+  newGameBtn.addEventListener("click", () => initGameUI(config, reward));
+  difficultySelect.value = Object.keys(configs).find(key => configs[key].rows === config.rows && configs[key].cols === config.cols && configs[key].mines === config.mines) || "easy";
+}
+
+function renderBoard() {
+  gameBoardEl.innerHTML = "";
+  gameBoardEl.style.gridTemplateColumns = `repeat(${gameConfig.cols}, 40px)`;
+  mineCountEl.textContent = gameConfig.mines;
+
+  for (let i = 0; i < gameConfig.rows; i++) {
+    for (let j = 0; j < gameConfig.cols; j++) {
+      const cell = document.createElement("div");
+      cell.className = "cell";
+      cell.dataset.row = i;
+      cell.dataset.col = j;
+
+      cell.addEventListener("click", () => handleCellClick(i, j));
+      cell.addEventListener("contextmenu", (e) => {
+        e.preventDefault();
+        handleRightClick(i, j);
+      });
+
+      gameBoardEl.appendChild(cell);
+    }
+  }
+}
+
+function handleCellClick(row, col) {
+  if (gameOver || revealed[row][col] || flagged[row][col]) return;
+
+  if (firstClick) {
+    placeMines(row, col);
+    firstClick = false;
+    startTimerLogic(updateTimerUI);
+  }
+
+  const revealedCells = revealCellLogic(row, col);
+  revealedCells.forEach(cellData => {
+    const cellEl = document.querySelector(`[data-row="${cellData.row}"][data-col="${cellData.col}"]`);
+    cellEl.classList.add("revealed");
+    if (cellData.value === -1) {
+      cellEl.textContent = "💣";
+      cellEl.classList.add("mine");
+    } else if (cellData.value > 0) {
+      cellEl.textContent = cellData.value;
+      cellEl.classList.add(`number-${cellData.value}`);
+    }
+  });
+
+  if (gameOver) {
+    endGameUI(gameWon);
+  } else {
+    checkWinUI();
+  }
+}
+
+function handleRightClick(row, col) {
+  if (gameOver || revealed[row][col]) return;
+
+  if (toggleFlagLogic(row, col)) {
+    const cellEl = document.querySelector(`[data-row="${row}"][data-col="${col}"]`);
+    if (flagged[row][col]) {
+      cellEl.classList.add("flagged");
+      cellEl.textContent = "🚩";
+    } else {
+      cellEl.classList.remove("flagged");
+      cellEl.textContent = "";
+    }
+    updateFlagCountUI();
+    checkWinUI();
+  }
+}
+
+function updateFlagCountUI() {
+  flagCountEl.textContent = getFlagCount();
+}
+
+function updateTimerUI(currentTimer) {
+  timerEl.textContent = currentTimer;
+}
+
+function checkWinUI() {
+  if (checkWinLogic()) {
+    endGameUI(true);
+  }
+}
+
+function endGameUI(won) {
+  stopTimerLogic();
+  if (won) {
+    messageEl.textContent = "🎉 You won! Congratulations!";
+    messageEl.className = "message win";
+    hiddenContentEl.classList.add("visible");
+    giveawayLinkEl.href = rewardLink;
+  } else {
+    messageEl.textContent = "💥 Game Over! You hit a mine.";
+    messageEl.className = "message lose";
+    revealAllMinesUI();
+  }
+}
+
+function revealAllMinesUI() {
+  const currentBoard = getBoard();
+  const currentRevealed = getRevealed();
+  for (let i = 0; i < gameConfig.rows; i++) {
+    for (let j = 0; j < gameConfig.cols; j++) {
+      if (currentBoard[i][j] === -1 && !currentRevealed[i][j]) {
+        const cellEl = document.querySelector(
+          `[data-row="${i}"][data-col="${j}"]`
+        );
+        cellEl.classList.add("revealed", "mine");
+        cellEl.textContent = "💣";
+      }
+    }
+  }
+}
