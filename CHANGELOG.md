@@ -1,3 +1,10 @@
+## version 0.1.1 - 2025-10-22
+- Removed unnecessary controls from the game page, such as difficulty select and New Game button
+- Fixed a bug where the first click was not recognized as a valid move
+-- This led to an "Uncaught TypeError: "firstClick" is read-only". This happens because firstClick was defined in game-logic.js, exported from game-logic.js, and imported into game-ui.js. Then game-ui.js tried to modify firstClick, which is not allowed.
+-- The fix was to keep firstClick as a locally scoped variable in game-ui.js, but not export it directly, instead accessing and modifying its value through function calls
+- Fixed a missing difficulty configuration after refactor (test difficulty)
+
 ## version 0.1.0 - 2025-10-22
 - Refactored `game.js` into modular components: `utils.js`, `game-logic.js`, `game-ui.js`, `creator.js`, and `game-init.js`
 - Renamed `index.html` to `game.html` (player page) and created a new `index.html` (creator page).
