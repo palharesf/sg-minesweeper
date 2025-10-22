@@ -1,3 +1,8 @@
+## version 0.1.2 - 2025-10-22
+- Writing improvements, general look and feel
+- Tree-shaking and module bundling, removing some leftover modules from the refactoring
+- Reworked encoding and decoding logic to Base58 (from Base64) -- assumption is that Base64 hash was messing Github Pages URL
+
 ## version 0.1.1 - 2025-10-22
 - Removed unnecessary controls from the game page, such as difficulty select and New Game button
 - Fixed a bug where the first click was not recognized as a valid move
