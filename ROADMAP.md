@@ -10,4 +10,6 @@
 - Pause timer after x seconds of inactivity
 - Time in minutes and seconds
 - Local storage to keep giveaway revealed
+- Localization options
+- Resize board automatically (relevant for larger boards e.g. Expert difficulty)
 - Eventually (later, later on) - login and leaderboard
