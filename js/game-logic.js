@@ -15,9 +15,18 @@ export let gameWon = false;
 export let mineCount = 0;
 export let timer = 0;
 export let timerInterval = null;
-export let firstClick = true;
 export let gameConfig = null;
 export let rewardLink = "";
+
+let firstClick = true;
+
+export function setFirstClick(value) {
+  firstClick = value;
+}
+
+export function isFirstClick() {
+  return firstClick;
+}
 
 export function initGameLogic(config, reward) {
   gameConfig = config;
@@ -27,7 +36,7 @@ export function initGameLogic(config, reward) {
   flagged = [];
   gameOver = false;
   gameWon = false;
-  firstClick = true;
+  setFirstClick(true);
   timer = 0;
   mineCount = config.mines;
 

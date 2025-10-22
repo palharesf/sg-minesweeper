@@ -8,7 +8,8 @@ import {
   gameWon,
   mineCount,
   timer,
-  firstClick,
+  isFirstClick,
+  setFirstClick,
   gameConfig,
   rewardLink,
   initGameLogic,
@@ -70,9 +71,9 @@ function renderBoard() {
 function handleCellClick(row, col) {
   if (gameOver || revealed[row][col] || flagged[row][col]) return;
 
-  if (firstClick) {
+  if (isFirstClick()) {
     placeMines(row, col);
-    firstClick = false;
+    setFirstClick(false);
     startTimerLogic(updateTimerUI);
   }
 
