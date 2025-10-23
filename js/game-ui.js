@@ -125,7 +125,7 @@ function checkWinUI() {
 function endGameUI(won) {
   stopTimerLogic();
   if (won) {
-    messageEl.textContent = "🎉 You won! Congratulations!";
+    messageEl.textContent = "🎉 You won!";
     messageEl.className = "message win";
     hiddenContentEl.classList.add("visible");
     document.getElementById("reward-content").textContent = rewardLink;
