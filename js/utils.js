@@ -24,17 +24,33 @@ export function base58ToString(str) {
 }
 
 /**
+ * Handles encrypting to make the secret more secure.
+ * It won't prevent anyone with access to the code from decoding it, but will make it slightly harder than just pasting the URL into a decrypter and getting the secret straightaway.
+ */
+
+import crypto from "https://cdn.jsdelivr.net/npm/crypto-js@4.1.1/+esm";
+
+export function encryptSecret(secret) {
+  return crypto.AES.encrypt(secret, "i-cant-stop-you-but-i-can-slow-you-down").toString();
+}
+
+export function decryptSecret(encryptedSecret) {
+  const bytes = crypto.AES.decrypt(encryptedSecret,"i-cant-stop-you-but-i-can-slow-you-down");
+  return bytes.toString(crypto.enc.Utf8);
+}
+
+/**
  * Encodes game configuration and reward URL into a URL hash string.
  * @param {object} config - Game configuration (rows, cols, mines).
- * @param {string} rewardUrl - The URL to be revealed upon winning.
+ * @param {string} rewardSecret - The secret to be revealed upon winning.
  * @returns {string} The encoded URL hash string.
  */
-export function encodeGameConfig(config, rewardUrl) {
+export function encodeGameConfig(config, rewardSecret) {
   const data = {
     rows: config.rows,
     cols: config.cols,
     mines: config.mines,
-    reward: rewardUrl,
+    reward: encryptSecret(rewardSecret),
   };
   const stringifiedData = JSON.stringify(data);
   return stringToBase58(stringifiedData); // Base58 encode the JSON string
@@ -53,7 +69,7 @@ export function decodeGameConfig(hash) {
     if (data && data.rows && data.cols && data.mines && data.reward) {
       return {
         config: { rows: data.rows, cols: data.cols, mines: data.mines },
-        rewardUrl: data.reward,
+        rewardUrl: decryptSecret(data.reward),
       };
     }
   } catch (e) {
