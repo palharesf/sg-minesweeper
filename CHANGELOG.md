@@ -1,3 +1,6 @@
+## version 0.1.3 - 2025-10-23
+- Adjusted the generated link (previous version missed the /sg-minesweeper/ prefix)
+
 ## version 0.1.2 - 2025-10-22
 - Writing improvements, general look and feel
 - Tree-shaking and module bundling, removing some leftover modules from the refactoring
@@ -6,8 +9,8 @@
 ## version 0.1.1 - 2025-10-22
 - Removed unnecessary controls from the game page, such as difficulty select and New Game button
 - Fixed a bug where the first click was not recognized as a valid move
--- This led to an "Uncaught TypeError: "firstClick" is read-only". This happens because firstClick was defined in game-logic.js, exported from game-logic.js, and imported into game-ui.js. Then game-ui.js tried to modify firstClick, which is not allowed.
--- The fix was to keep firstClick as a locally scoped variable in game-ui.js, but not export it directly, instead accessing and modifying its value through function calls
+    - This led to an "Uncaught TypeError: "firstClick" is read-only". This happens because firstClick was defined in game-logic.js, exported from game-logic.js, and imported into game-ui.js. Then game-ui.js tried to modify firstClick, which is not allowed.
+    - The fix was to keep firstClick as a locally scoped variable in game-ui.js, but not export it directly, instead accessing and modifying its value through function calls
 - Fixed a missing difficulty configuration after refactor (test difficulty)
 
 ## version 0.1.0 - 2025-10-22
