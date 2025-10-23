@@ -1,3 +1,11 @@
+## version 0.2.1 - 2025-10-23
+- Improved secret encryption in utils.js
+    - Now it won't show as plain text in the URL, which could be easily decoded, but instead, as a scrambled string
+    - Anyone with access to the code can easily decrypt it since the decryption key is public, but at least it will slow down less capable actors
+- Removed Base58 dependency for encoding and decoding
+- Added 'pako' for deflating and inflating data
+- Reworked encoding and decoding logic to use pako and generate a shorter link
+
 ## version 0.1.4 - 2025-10-23
 - Updated documentation for utils.js
 - Removed unused imports from creator.js
