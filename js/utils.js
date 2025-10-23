@@ -1,5 +1,8 @@
 // Helper functions for URL parameter parsing and encoding/decoding game configurations
 
+/**
+ * Handles Base58 encoding and decoding of game configuration and reward URL.
+ */
 import bs58 from "https://cdn.jsdelivr.net/npm/bs58@6.0.0/+esm";
 
 export function encodeBase58(bytes) {
