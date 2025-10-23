@@ -186,7 +186,6 @@ button:hover {
 }
 
 .creator-form select,
-.creator-form input[type="url"],
 .creator-form input[type="text"] {
   padding: 10px;
   font-size: 16px;
@@ -194,6 +193,20 @@ button:hover {
   border-radius: 5px;
   width: 100%;
   max-width: 400px; /* Limit width for better readability */
+}
+
+.creator-form input[type="url"] {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 400px; /* Limit width for better readability */
+}
+
+.creator-form input[type="url"]#reward-url,
+.generated-link-panel input[type="text"]#shareable-link {
+  font-size: 11px;
 }
 
 .creator-form button {
