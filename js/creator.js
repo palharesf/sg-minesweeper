@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const encodedConfig = encodeGameConfig(config, rewardUrl);
     const uniqueId = generateUniqueId(); // Not strictly used for game config, but for unique link
-    const shareableLink = `${window.location.origin}/game.html#${encodedConfig}`;
+    const shareableLink = `${window.location.origin}/sg-minesweeper/game.html#${encodedConfig}`;
 
     shareableLinkInput.value = shareableLink;
     generatedLinkPanel.style.display = "block";
