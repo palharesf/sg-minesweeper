@@ -38,7 +38,9 @@ export function encodeGameConfig(config, rewardSecret) {
     reward: encryptSecret(rewardSecret),
   };
   const stringifiedData = JSON.stringify(data);
-  return stringToBase58(stringifiedData); // Base58 encode the JSON string
+  const compressed = pako.deflate(stringifiedData);
+  const base64 = btoa(String.fromCharCode(...compressed));
+  return base64;
 }
 
 /**
@@ -49,7 +51,10 @@ export function encodeGameConfig(config, rewardSecret) {
 export function decodeGameConfig(hash) {
   if (!hash || hash.length < 2) return null;
   try {
-    const decodedString = base58ToString(hash.slice(1)); // Base58 decode
+    const base64 = hash.slice(1);
+    const compressed = Uint8Array.from(atob(base64), (c) => c.charCodeAt(0));
+    const decompressed = pako.inflate(compressed);
+    const decodedString = new TextDecoder().decode(decompressed);
     const data = JSON.parse(decodedString);
     if (data && data.rows && data.cols && data.mines && data.reward) {
       return {
