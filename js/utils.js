@@ -17,6 +17,14 @@ export function decryptSecret(encryptedSecret) {
 }
 
 /**
+ * Handles compression, so the generated JSON is a bit smaller.
+ * Probably this can all be handled more elegantly if I got rid of the JSON entirely.
+ * Something to ponder
+ */
+
+import pako from "https://cdn.jsdelivr.net/npm/pako@2.0.4/+esm";
+
+/**
  * Encodes game configuration and reward URL into a URL hash string.
  * @param {object} config - Game configuration (rows, cols, mines).
  * @param {string} rewardSecret - The secret to be revealed upon winning.
