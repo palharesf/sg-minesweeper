@@ -28,7 +28,6 @@ const mineCountEl = document.getElementById("mine-count");
 const timerEl = document.getElementById("timer");
 const messageEl = document.getElementById("message");
 const hiddenContentEl = document.getElementById("hidden-content");
-const giveawayLinkEl = document.getElementById("giveaway-link");
 
 export function initGameUI(config, reward) {
   initGameLogic(config, reward);
@@ -129,7 +128,7 @@ function endGameUI(won) {
     messageEl.textContent = "🎉 You won! Congratulations!";
     messageEl.className = "message win";
     hiddenContentEl.classList.add("visible");
-    giveawayLinkEl.href = rewardLink;
+    document.getElementById("reward-content").textContent = rewardLink;
   } else {
     messageEl.textContent = "💥 Game Over! You hit a mine.";
     messageEl.className = "message lose";
