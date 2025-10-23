@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const rewardUrl = rewardUrlInput.value;
 
     if (!rewardUrl) {
-      alert("Please enter a destination URL for the reward.");
+      alert("Please enter a secret.");
       return;
     }
 
