@@ -1,29 +1,6 @@
 // Helper functions for URL parameter parsing and encoding/decoding game configurations
 
 /**
- * Handles Base58 encoding and decoding of game configuration and reward URL.
- */
-import bs58 from "https://cdn.jsdelivr.net/npm/bs58@6.0.0/+esm";
-
-export function encodeBase58(bytes) {
-  return bs58.encode(bytes);
-}
-
-export function decodeBase58(string) {
-  return bs58.decode(string);
-}
-
-export function stringToBase58(str) {
-  const bytes = new TextEncoder().encode(str);
-  return bs58.encode(bytes);
-}
-
-export function base58ToString(str) {
-  const bytes = bs58.decode(str);
-  return new TextDecoder().decode(bytes);
-}
-
-/**
  * Handles encrypting to make the secret more secure.
  * It won't prevent anyone with access to the code from decoding it, but will make it slightly harder than just pasting the URL into a decrypter and getting the secret straightaway.
  */
