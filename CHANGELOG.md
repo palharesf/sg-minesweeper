@@ -1,3 +1,6 @@
+## version 0.9.2 - 2025-10-24
+- Adjusted button style to properly hide the "Restart" button
+
 ## version 0.9.1 - 2025-10-24
 - Updated initGameUI logic to hide the "Restart" button (previously visible when it shouldn't)
 
