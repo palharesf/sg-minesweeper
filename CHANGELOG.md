@@ -1,3 +1,6 @@
+## version 0.9.1 - 2025-10-24
+- Updated initGameUI logic to hide the "Restart" button (previously visible when it shouldn't)
+
 ## version 0.9.0 - 2025-10-24
 - Refactored base64 encoding to use `arrayBufferToBase64` instead of `fromCharCode` and spread operator
     - The previous approach could fail for binary data because String.fromCharCode doesn't handle values greater than 255 correctly, and the spread operator with large arrays can cause issues
