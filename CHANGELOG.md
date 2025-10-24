@@ -1,3 +1,8 @@
+## version 1.0.0 - 2025-10-24
+- Public release
+- Added footer
+- Incorporated cell resizing logic for larger boards
+
 ## version 0.9.2 - 2025-10-24
 - Adjusted button style to properly hide the "Restart" button
 
