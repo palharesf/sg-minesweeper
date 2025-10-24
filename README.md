@@ -16,10 +16,31 @@ If you hit a mine, you have to refresh the page.
 
 Once you've won the game, you'll be able to see the secret that the game's creator hid.
 
+## How long does it take to solve the game?
+
+I tested the two easiest difficulty options a lot. "Test" difficulty hardly takes more than 1 second to solve, while "Easy" difficulty usually takes around 100 seconds (1m40s) to solve on average.
+
+[Claude](https://claude.ai/chat/73ea4433-47a1-482f-954b-de4762c8de26) estimates that, based on those figures, "Medium" should take 3-5 minutes, "Hard" goes on to 8-12 minutes, and "Expert" should range from 25-40 minutes.
+
+Think about it if you're feeling spicy and want to screw your fellow SG friends.
+
 ## Can I play on my phone?
 
-It worked on mine. Short-press for opening squares, long-press to set flags, it should be fine.
+It worked on mine. Short-press for opening cells, long-press to set flags, it should be fine.
 I haven't tried to create a giveaway through my phone, but I don't see why it wouldn't work
+
+## What kind of secrets can I hide?
+
+Anything that can be encoded as a string (and compressed with pako).
+Be sensible, don't try to hide a novel. My testing was limited to giveaway links, five-char codes, and 15-char Steam keys. I didn't stress-test this part of the code, but if you want to do it, be my guest
+
+## So I heard it's impossible to decrypt my secret that I hid with sg-minesweeper, right?
+
+Wrong. It's not. If you're tech-savvy you can reverse-engineer the secret based on the URL. The point of this project is not to offer a fool-proof way to share secrets (there's [OneTimeSecret](https://onetimesecret.com/en/) for instance), but rather to give a fun way to hide them.
+
+## I found a bug / I have an idea / I have a suggestion
+
+That's terrible (if it's a bug) or wonderful (if it's a suggestion). You can [open an issue](https://github.com/sg-minesweeper/sg-minesweeper/issues) on GitHub and we'll take it from there
 
 ## Who deserves credit here?
 I would be remiss if I didn't mention a few specific SG members:
@@ -28,6 +49,12 @@ I would be remiss if I didn't mention a few specific SG members:
 - [RosimInc](https://www.steamgifts.com/user/rosiminc) - For the SG nono project. Not only I had incredible fun playing it over and over and over, but their project served as the template for mine, both in terms of code as well as deployment
 - [yannbz](https://www.steamgifts.com/user/yannbz) - Similar to RosimInc, but with the Wordle game. Except that I hate Wordle and played their project once hahaha but jokes aside, the project has been quite successful and popular with a segment of the SG community, and I can appreciate and respect that as well
 - [Grogglz](https://www.steamgifts.com/user/Grogglz) - For creating a kind thread that eventually led to Carlo's comment that sparked the whole thing. Without your fun challenge there would be no minesweeper
+- [Carlo](https://www.steamgifts.com/user/Carlo), [BEAUREGARDE](https://www.steamgifts.com/user/BEAUREGARDE), [Vini1](https://www.steamgifts.com/user/Vini1) and [adam1224](https://www.steamgifts.com/user/adam1224) - For the playtesting support
+
+## You are the best and I want to support you, how can I do that?
+
+Feel free to contribute to the code on [GitHub](https://github.com/sg-minesweeper/sg-minesweeper).
+I also take [coffee](https://ko-fi.com/fernandopa), or you can gift me a game from my [Steam Wishlist](https://store.steampowered.com/wishlist/id/fernandopaa/) if you're into that kind of thing
 
 ## Documentation
 
