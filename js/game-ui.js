@@ -38,6 +38,7 @@ export function initGameUI(config, reward) {
   messageEl.textContent = "";
   messageEl.className = "message";
   hiddenContentEl.classList.remove("visible");
+  restartButtonEl.classList.remove("visible");
 }
 
 function renderBoard() {
