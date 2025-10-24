@@ -43,7 +43,11 @@ export function initGameUI(config, reward) {
 
 function renderBoard() {
   gameBoardEl.innerHTML = "";
-  gameBoardEl.style.gridTemplateColumns = `repeat(${gameConfig.cols}, 40px)`;
+  
+  const cellSize = calculateCellSize();
+  gameBoardEl.style.gridTemplateColumns = `repeat(${gameConfig.cols}, ${cellSize}px)`;
+  gameBoardEl.style.setProperty("--cell-size", `${cellSize}px`);
+
   mineCountEl.textContent = gameConfig.mines;
 
   for (let i = 0; i < gameConfig.rows; i++) {
@@ -153,6 +157,26 @@ function revealAllMinesUI() {
       }
     }
   }
+}
+
+function calculateCellSize() {
+  const maxCellSize = 40;
+  const minCellSize = 20;
+  const padding = 40; // Account for container padding
+
+  const containerWidth = gameBoardEl.parentElement.clientWidth - padding;
+  const containerHeight = window.innerHeight - 300; // Reserve space for header and controls
+
+  const cellWidthByContainer = Math.floor(containerWidth / gameConfig.cols);
+  const cellHeightByContainer = Math.floor(containerHeight / gameConfig.rows);
+
+  const calculatedSize = Math.min(
+    cellWidthByContainer,
+    cellHeightByContainer,
+    maxCellSize
+  );
+
+  return Math.max(calculatedSize, minCellSize);
 }
 
 restartButtonEl.addEventListener("click", () => initGameUI(gameConfig, rewardLink));
