@@ -39,7 +39,7 @@ export function encodeGameConfig(config, rewardSecret) {
   };
   const stringifiedData = JSON.stringify(data);
   const compressed = pako.deflate(stringifiedData);
-  const base64 = btoa(String.fromCharCode(...compressed));
+  const base64 = arrayBufferToBase64(compressed);
   return base64;
 }
 
