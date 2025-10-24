@@ -1,3 +1,11 @@
+## version 0.9.0 - 2025-10-24
+- Refactored base64 encoding to use `arrayBufferToBase64` instead of `fromCharCode` and spread operator
+    - The previous approach could fail for binary data because String.fromCharCode doesn't handle values greater than 255 correctly, and the spread operator with large arrays can cause issues
+    - The key change is the new arrayBufferToBase64 helper function that properly converts the compressed Uint8Array to a base64 string without using the spread operator
+    - That prevents backward compatibility with older links, but since this version is not public yet this shouldn't be a problem
+- Added a button to restart the game when a mine is hit
+- Removed unused functions
+
 ## version 0.2.1 - 2025-10-23
 - Improved secret encryption in utils.js
     - Now it won't show as plain text in the URL, which could be easily decoded, but instead, as a scrambled string
@@ -7,11 +15,11 @@
 - Reworked encoding and decoding logic to use pako and generate a shorter link
 
 ## version 0.1.4 - 2025-10-23
-- Updated documentation for utils.js
-- Removed unused imports from creator.js
-- Updated wording for alert in creator.js when no secret is provided
-- Updated wording for game-ui.js win screen
-- QoL improvements in creator.js including auto-selecting generated link, removing unnecessary alert and updating button text when copying is successful
+- Updated documentation for `utils.js`
+- Removed unused imports from `creator.js`
+- Updated wording for alert in `creator.js` when no secret is provided
+- Updated wording for `game-ui.js` win screen
+- QoL improvements in `creator.js` including auto-selecting generated link, removing unnecessary alert and updating button text when copying is successful
 - Updated styles to reduce font size on long input boxes
 - Updated the game page to show the link directly after beating the game instead of requiring a button click / anchor element
 
@@ -26,8 +34,8 @@
 ## version 0.1.1 - 2025-10-22
 - Removed unnecessary controls from the game page, such as difficulty select and New Game button
 - Fixed a bug where the first click was not recognized as a valid move
-    - This led to an "Uncaught TypeError: "firstClick" is read-only". This happens because firstClick was defined in game-logic.js, exported from game-logic.js, and imported into game-ui.js. Then game-ui.js tried to modify firstClick, which is not allowed.
-    - The fix was to keep firstClick as a locally scoped variable in game-ui.js, but not export it directly, instead accessing and modifying its value through function calls
+    - This led to an "Uncaught TypeError: "firstClick" is read-only". This happens because firstClick was defined in `game-logic.js`, exported from `game-logic.js`, and imported into `game-ui.js`. Then `game-ui.js` tried to modify firstClick, which is not allowed.
+    - The fix was to keep firstClick as a locally scoped variable in `game-ui.js`, but not export it directly, instead accessing and modifying its value through function calls
 - Fixed a missing difficulty configuration after refactor (test difficulty)
 
 ## version 0.1.0 - 2025-10-22
