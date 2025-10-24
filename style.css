@@ -132,7 +132,7 @@ button:hover {
   color: #808080;
 }
 
-.hidden-content, .restart {
+.hidden-content, button.restart {
   margin: 20px auto 0 auto;
   padding: 10px;
   background: #e8f5e9;
@@ -145,7 +145,7 @@ button:hover {
   display: block;
 }
 
-.restart.visible {
+button.restart.visible {
   display: flex;
   align-items: center;
   justify-content: center
