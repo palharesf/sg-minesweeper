@@ -1,6 +1,5 @@
 # Planned Features
 
-- Add the ability to restart the game after hitting a mine (for now, hit F5)
 - Customizable board size and number of mines
 - SG theme / visual language
 - Light and dark mode
