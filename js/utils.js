@@ -17,6 +17,19 @@ export function decryptSecret(encryptedSecret) {
 }
 
 /**
+ * Converts Uint8Array to base64 string safely
+ */
+function arrayBufferToBase64(buffer) {
+  let binary = '';
+  const bytes = new Uint8Array(buffer);
+  const len = bytes.byteLength;
+  for (let i = 0; i < len; i++) {
+    binary += String.fromCharCode(bytes[i]);
+  }
+  return btoa(binary);
+}
+
+/**
  * Handles compression, so the generated JSON is a bit smaller.
  * Probably this can all be handled more elegantly if I got rid of the JSON entirely.
  * Something to ponder
