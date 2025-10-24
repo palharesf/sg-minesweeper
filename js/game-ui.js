@@ -28,6 +28,7 @@ const mineCountEl = document.getElementById("mine-count");
 const timerEl = document.getElementById("timer");
 const messageEl = document.getElementById("message");
 const hiddenContentEl = document.getElementById("hidden-content");
+const restartButtonEl = document.getElementById("restart-button");
 
 export function initGameUI(config, reward) {
   initGameLogic(config, reward);
@@ -132,6 +133,7 @@ function endGameUI(won) {
   } else {
     messageEl.textContent = "💥 Game Over! You hit a mine.";
     messageEl.className = "message lose";
+    restartButtonEl.classList.add("visible");
     revealAllMinesUI();
   }
 }
@@ -151,3 +153,5 @@ function revealAllMinesUI() {
     }
   }
 }
+
+restartButtonEl.addEventListener("click", () => initGameUI(gameConfig, rewardLink));

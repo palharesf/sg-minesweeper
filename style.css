@@ -132,9 +132,9 @@ button:hover {
   color: #808080;
 }
 
-.hidden-content {
-  margin-top: 20px;
-  padding: 15px;
+.hidden-content, .restart {
+  margin: 20px auto 0 auto;
+  padding: 10px;
   background: #e8f5e9;
   border-radius: 5px;
   text-align: center;
@@ -143,6 +143,12 @@ button:hover {
 
 .hidden-content.visible {
   display: block;
+}
+
+.restart.visible {
+  display: flex;
+  align-items: center;
+  justify-content: center
 }
 
 .hidden-content h2 {
