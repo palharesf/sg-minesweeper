@@ -142,17 +142,9 @@ export function checkWinLogic() {
   }
 
   if (revealedCount === gameConfig.rows * gameConfig.cols - gameConfig.mines) {
-    let flaggedCount = 0;
-    for (let i = 0; i < gameConfig.rows; i++) {
-      for (let j = 0; j < gameConfig.cols; j++) {
-        if (board[i][j] === -1 && flagged[i][j]) flaggedCount++;
-      }
-    }
-    if (flaggedCount === gameConfig.mines) {
-      gameOver = true;
-      gameWon = true;
-      return true;
-    }
+    gameOver = true;
+    gameWon = true;
+    return true;
   }
   return false;
 }
