@@ -136,7 +136,6 @@ button:hover {
 .hidden-content, button.restart {
   margin: 20px auto 0 auto;
   padding: 10px;
-  background: #e8f5e9;
   border-radius: 5px;
   text-align: center;
   display: none;
