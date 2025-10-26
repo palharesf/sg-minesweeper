@@ -180,3 +180,13 @@ function calculateCellSize() {
 }
 
 restartButtonEl.addEventListener("click", () => initGameUI(gameConfig, rewardLink));
+
+document
+  .getElementById("rules-container")
+  .addEventListener("click", function () {
+    const rulesList = document.getElementById("rules-list");
+    const container = document.getElementById("rules-container");
+
+    rulesList.classList.toggle("visible");
+    container.classList.toggle("expanded");
+  });

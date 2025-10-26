@@ -272,3 +272,39 @@ button.restart.visible {
   color: inherit;
   text-decoration: none;
 }
+
+/* Rules Container Styles */
+
+.rules-container {
+  width: 600px; /* Match the max-width of the game container */
+  cursor: pointer;
+}
+
+.rules-container h3 {
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.rules-container ul {
+  display: none;
+  margin-top: 15px;
+}
+
+.rules-container ul.visible {
+  display: block;
+}
+
+.rules-container h3::after {
+  content: ' ▼';
+  font-size: 0.8em;
+}
+
+.rules-container.expanded h3::after {
+  content: ' ▲';
+}
+
+.rules-container li {
+  font-size: 0.75em;
+  margin-bottom: 5px;
+}
+}
