@@ -1,6 +1,7 @@
 # Planned Features
 
 - Customizable board size and number of mines
+- Option to reveal mines once game is won (or flag the mine cells, something like that)
 - SG theme / visual language
 - Light and dark mode
 - QoL features (research MineSweeper-specific communities)
