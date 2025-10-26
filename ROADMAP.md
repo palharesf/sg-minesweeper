@@ -1,6 +1,8 @@
 # Planned Features
 
 - Customizable board size and number of mines
+- Auto-reveal tiles when placing flags and clicking on adjacent, numbered cells
+- No guessing mode
 - Option to reveal mines once game is won (or flag the mine cells, something like that)
 - SG theme / visual language
 - Light and dark mode
