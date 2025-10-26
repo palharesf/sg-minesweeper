@@ -1,3 +1,16 @@
+## version 1.0.1 - 2025-10-25
+- Updated game logic so game ends when all non-mine cells are revealed
+    - This removes the need to flag all mines to win. The effect is practically the same, but it can be less confusing for new players
+- Updated link generation logic to be shorter and URL safe
+    - This was a major update. Instead of sending the data in a JSON, the encoder now uses a simple array based format, which saves a lot of data
+    - We also changed the encryption method to use XOR instead of AES. It's not as secure, but lighter and removes a dependency on external libraries
+    - The base64 encoding was also made URL safe by replacing invalid characters
+- Updated footer wording and style
+- General wording adjustments
+- Added game rules container
+- General formatting and readibility improvements
+- Fixed container sizes to prevent different sizes based on content
+
 ## version 1.0.0 - 2025-10-24
 - Public release
 - Added footer
