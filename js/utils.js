@@ -1,22 +1,6 @@
 // Helper functions for URL parameter parsing and encoding/decoding game configurations
 
 /**
- * Handles encrypting to make the secret more secure.
- * It won't prevent anyone with access to the code from decoding it, but will make it slightly harder than just pasting the URL into a decrypter and getting the secret straightaway.
- */
-
-import crypto from "https://cdn.jsdelivr.net/npm/crypto-js@4.1.1/+esm";
-
-export function encryptSecret(secret) {
-  return crypto.AES.encrypt(secret, "i-cant-stop-you-but-i-can-slow-you-down").toString();
-}
-
-export function decryptSecret(encryptedSecret) {
-  const bytes = crypto.AES.decrypt(encryptedSecret,"i-cant-stop-you-but-i-can-slow-you-down");
-  return bytes.toString(crypto.enc.Utf8);
-}
-
-/**
  * Converts Uint8Array to base64 string safely
  */
 function arrayBufferToBase64(buffer) {
@@ -30,9 +14,7 @@ function arrayBufferToBase64(buffer) {
 }
 
 /**
- * Handles compression, so the generated JSON is a bit smaller.
- * Probably this can all be handled more elegantly if I got rid of the JSON entirely.
- * Something to ponder
+ * Handles compression, so the generated link is a bit smaller.
  */
 
 import pako from "https://cdn.jsdelivr.net/npm/pako@2.0.4/+esm";
@@ -44,16 +26,18 @@ import pako from "https://cdn.jsdelivr.net/npm/pako@2.0.4/+esm";
  * @returns {string} The encoded URL hash string.
  */
 export function encodeGameConfig(config, rewardSecret) {
-  const data = {
-    rows: config.rows,
-    cols: config.cols,
-    mines: config.mines,
-    reward: encryptSecret(rewardSecret),
-  };
-  const stringifiedData = JSON.stringify(data);
-  const compressed = pako.deflate(stringifiedData);
+  const key = "i-cant-stop-you-but-i-can-slow-you-down";
+  let encrypted = "";
+  for (let i = 0; i < rewardSecret.length; i++) {
+    encrypted += String.fromCharCode(
+      rewardSecret.charCodeAt(i) ^ key.charCodeAt(i % key.length)
+    );
+  }
+
+  const data = `${config.rows},${config.cols},${config.mines},${encrypted}`;
+  const compressed = pako.deflate(data);
   const base64 = arrayBufferToBase64(compressed);
-  return base64;
+  return base64.replace(/\+/g, "-").replace(/\//g, "_").replace(/=/g, "");
 }
 
 /**
@@ -64,17 +48,35 @@ export function encodeGameConfig(config, rewardSecret) {
 export function decodeGameConfig(hash) {
   if (!hash || hash.length < 2) return null;
   try {
-    const base64 = hash.slice(1);
+    let base64 = hash.slice(1);
+    base64 = base64.replace(/-/g, "+").replace(/_/g, "/");
+    while (base64.length % 4) {
+      base64 += "=";
+    }
+    
     const compressed = Uint8Array.from(atob(base64), (c) => c.charCodeAt(0));
     const decompressed = pako.inflate(compressed);
     const decodedString = new TextDecoder().decode(decompressed);
-    const data = JSON.parse(decodedString);
-    if (data && data.rows && data.cols && data.mines && data.reward) {
-      return {
-        config: { rows: data.rows, cols: data.cols, mines: data.mines },
-        rewardUrl: decryptSecret(data.reward),
-      };
+    
+    const parts = decodedString.split(",");
+    if (parts.length !== 4) {
+      return null;
     }
+    const [rows, cols, mines, encrypted] = parts;
+
+    const key = "i-cant-stop-you-but-i-can-slow-you-down";
+    let decrypted = "";
+    for (let i = 0; i < encrypted.length; i++) {
+      decrypted += String.fromCharCode(
+        encrypted.charCodeAt(i) ^ key.charCodeAt(i % key.length)
+      );
+    }
+
+    return {
+      config:
+        { rows: parseInt(rows), cols: parseInt(cols), mines: parseInt(mines) },
+      rewardUrl: decrypted
+    };
   } catch (e) {
     console.error("Failed to decode game config from URL hash:", e);
   }
