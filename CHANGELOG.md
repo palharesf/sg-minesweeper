@@ -1,3 +1,6 @@
+## version 1.0.3 - 2025-10-27
+- Hotfix for very large boards overflowing the parent container
+
 ## version 1.0.2 - 2025-10-27
 - Implemented custom difficulty selector and removed "Test" difficulty option
 - Code readability cleanup
