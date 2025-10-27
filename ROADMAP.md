@@ -1,7 +1,7 @@
 # Planned Features
 
-- Customizable board size and number of mines
 - Auto-reveal tiles when placing flags and clicking on adjacent, numbered cells
+- Link the "Creator" page from the "Solve" page
 - No guessing mode
 - Option to reveal mines once game is won (or flag the mine cells, something like that)
 - SG theme / visual language
@@ -11,4 +11,4 @@
 - Time in minutes and seconds
 - Local storage to keep giveaway revealed
 - Localization options
-- Eventually (later, later on) - login and leaderboard
+- Eventually (later, later on) - login and leaderboard, list of games solved and attempted but not solved yet
