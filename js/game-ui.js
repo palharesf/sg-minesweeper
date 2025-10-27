@@ -161,7 +161,7 @@ function revealAllMinesUI() {
 
 function calculateCellSize() {
   const maxCellSize = 40;
-  const minCellSize = 20;
+  const minCellSize = 18;
   const padding = 40; // Account for container padding
 
   const containerWidth = gameBoardEl.parentElement.clientWidth - padding;
