@@ -27,7 +27,9 @@ Think about it if you're feeling spicy and want to screw your fellow SG friends.
 ## Can I play on my phone?
 
 It worked on mine. Short-press for opening cells, long-press to set flags, it should be fine.
-I haven't tried to create a giveaway through my phone, but I don't see why it wouldn't work
+I haven't tried to create a giveaway through my phone, but I don't see why it wouldn't work.
+
+Users have reported compatibility issues with Safari on iOS. Others have reported everything working fine on Chrome. I use Firefox and it works.
 
 ## What kind of secrets can I hide?
 
@@ -53,8 +55,12 @@ I would be remiss if I didn't mention a few specific SG members:
 
 ## You are the best and I want to support you, how can I do that?
 
-Feel free to contribute to the code on [GitHub](https://github.com/sg-minesweeper/sg-minesweeper).
+Giving me a Star here is already a great start! Feel free to also contribute to the code on [GitHub](https://github.com/sg-minesweeper/sg-minesweeper).
 I also take [coffee](https://ko-fi.com/fernandopa), or you can gift me a game from my [Steam Wishlist](https://store.steampowered.com/wishlist/id/fernandopaa/) if you're into that kind of thing
+
+## What are some other great Minesweeper communities that had great features implemented for inspiration?
+
+[MineSweeper Online](https://minesweeper.online/) is unsurprisingly among the best.
 
 ## Documentation
 

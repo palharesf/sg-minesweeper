@@ -307,3 +307,71 @@ button.restart.visible {
   font-size: 0.75em;
   margin-bottom: 5px;
 }
+
+/* Custom Difficulty Selector Styles */
+#custom-difficulty-inputs {
+  display: none;
+  grid-template-columns: auto 1fr;
+  gap: 10px 15px;
+  align-items: center;
+  font-size: 0.8em;
+  margin-top: 10px;
+}
+
+#custom-difficulty-inputs:not(.hidden-content) {
+  display: grid; /* Show as grid when not hidden */
+}
+
+#custom-difficulty-inputs label {
+  text-align: right;
+  margin: 0;
+}
+
+#custom-difficulty-inputs input[type="number"] {
+  width: 60px;
+  padding: 8px;
+  font-size: 1em;
+  max-width: 80px;
+  border: 1px solid #999;
+  border-radius: 5px;
+}
+
+/* Tooltip styling */
+#custom-difficulty-inputs label {
+  text-align: right;
+  margin: 0;
+  position: relative;
+  cursor: help;
+}
+
+#custom-difficulty-inputs label:hover::after {
+  opacity: 1;
+}
+
+/* Custom tooltip */
+[data-tooltip] {
+  position: relative;
+}
+
+[data-tooltip]::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px 12px;
+  background: #333;
+  color: white;
+  border-radius: 4px;
+  font-size: 0.85em;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  margin-bottom: 5px;
+  z-index: 1000;
+}
+
+[data-tooltip]:hover::before {
+  opacity: 1;
+}
