@@ -4,6 +4,21 @@ import { configs } from "./game-logic.js";
 document.addEventListener("DOMContentLoaded", () => {
   const difficultySelect = document.getElementById("difficulty-creator");
   const rewardUrlInput = document.getElementById("reward-url");
+  // Define custom input elements
+  const customRowsInput = document.getElementById("custom-rows");
+  const customColsInput = document.getElementById("custom-cols");
+  const customMinesInput = document.getElementById("custom-mines");
+
+  // Add change event listener for difficulty dropdown
+  difficultySelect.addEventListener("change", () => {
+    const customDifficultyInputs = document.getElementById("custom-difficulty-inputs");
+    if (difficultySelect.value === "custom") {
+      customDifficultyInputs.classList.remove("hidden-content");
+    } else {
+      customDifficultyInputs.classList.add("hidden-content");
+    }
+  });
+
   const generateLinkBtn = document.getElementById("generate-link-btn");
   const generatedLinkPanel = document.querySelector(".generated-link-panel");
   const shareableLinkInput = document.getElementById("shareable-link");
@@ -18,7 +33,31 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    const config = configs[selectedDifficulty];
+    let config;
+    if (selectedDifficulty === "custom") {
+      const rows = parseInt(customRowsInput.value);
+      const cols = parseInt(customColsInput.value);
+      const mines = parseInt(customMinesInput.value);
+
+      // Client-side validation
+      if (rows < 3 || rows > 30) {
+        alert("Please enter a valid number of rows (3-30).");
+        return;
+      }
+      if (cols < 3 || cols > 30) {
+        alert("Please enter a valid number of columns (3-30).");
+        return;
+      }
+      if (mines < 1 || mines >= rows * cols) {
+        alert("Please enter a valid number of mines (1 to rows * cols - 1).");
+        return;
+      }
+
+      config = { rows, cols, mines };
+    } else {
+      config = configs[selectedDifficulty];
+    }
+
     if (!config) {
       alert("Invalid difficulty selected.");
       return;
