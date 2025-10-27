@@ -1,3 +1,7 @@
+## version 1.0.2 - 2025-10-27
+- Implemented custom difficulty selector and removed "Test" difficulty option
+- Code readability cleanup
+
 ## version 1.0.1 - 2025-10-25
 - Updated game logic so game ends when all non-mine cells are revealed
     - This removes the need to flag all mines to win. The effect is practically the same, but it can be less confusing for new players
