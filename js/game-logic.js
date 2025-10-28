@@ -18,6 +18,8 @@ export let timerInterval = null;
 export let gameConfig = null;
 export let rewardLink = "";
 
+// firstClick handlers, since firstClick is a local variable that needs to be modified by other modules
+
 let firstClick = true;
 
 export function setFirstClick(value) {
