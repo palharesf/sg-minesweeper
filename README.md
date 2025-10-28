@@ -18,7 +18,7 @@ Once you've won the game, you'll be able to see the secret that the game's creat
 
 ## How long does it take to solve the game?
 
-I tested the two easiest difficulty options a lot. "Test" difficulty hardly takes more than 1 second to solve, while "Easy" difficulty usually takes around 100 seconds (1m40s) to solve on average.
+I tested the two easiest difficulty options a lot. "Test" difficulty (3x3 with 1 mine) usually  takes 1 second to solve, while "Easy" difficulty (8x8 with 10 mines) takes around 100 seconds (1m40s) to solve on average.
 
 [Claude](https://claude.ai/chat/73ea4433-47a1-482f-954b-de4762c8de26) estimates that, based on those figures, "Medium" should take 3-5 minutes, "Hard" goes on to 8-12 minutes, and "Expert" should range from 25-40 minutes.
 
@@ -55,12 +55,13 @@ I would be remiss if I didn't mention a few specific SG members:
 
 ## You are the best and I want to support you, how can I do that?
 
-Giving me a Star here is already a great start! Feel free to also contribute to the code on [GitHub](https://github.com/sg-minesweeper/sg-minesweeper).
+Giving me a Star here is a great start! Feel free to contribute to the code on [GitHub](https://github.com/sg-minesweeper/sg-minesweeper).
 I also take [coffee](https://ko-fi.com/fernandopa), or you can gift me a game from my [Steam Wishlist](https://store.steampowered.com/wishlist/id/fernandopaa/) if you're into that kind of thing
 
 ## What are some other great Minesweeper communities that had great features implemented for inspiration?
 
 [MineSweeper Online](https://minesweeper.online/) is unsurprisingly among the best.
+[Simon Tathan's Minesweeper](https://www.chiark.greenend.org.uk/~sgtatham/puzzles/js/mines.html) provided the core logic for improved board generation which eliminates guessing. I highly recommend studying this code as well, available on [GitHub](https://github.com/ghewgill/puzzles/blob/master/mines.c) or [Tartarus](https://git.tartarus.org/simon/puzzles.git).
 
 ## Documentation
 

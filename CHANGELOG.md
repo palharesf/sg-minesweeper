@@ -1,3 +1,15 @@
+## version 1.1.0 - 2025-10-28
+- Added a solver module, which can be used to check if a given game configuration is solvable without guessing
+- Integrated the solver into the placeMines routine to ensure created games are solvable
+    - This includes defining a safe (forbidden) zone around the first click, placing the mines as before (except in and around the safe zone), calculating each cell's number, and checking if the game is solvable
+    - If a game is not solvable with the current solver implementation, warn the user
+- Added several game parameter validations on the creator page
+    - This include input validation for the number of mines in a custom game
+    - As well as comparing the number of mines with the number of cells + the forbidden zone (zone around the initial click that is empty, important for the solver to work properly)
+- Added alert messages for high-mine density configurations
+    - Also important for the solver, as it's efficacy drops very quickly as the mine density increases
+- Improved documentation
+
 ## version 1.0.3 - 2025-10-27
 - Hotfix for very large boards overflowing the parent container
 

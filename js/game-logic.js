@@ -1,5 +1,7 @@
 // Core Minesweeper game logic
 
+import { isSolvable } from "./solver.js";
+
 export const configs = {
   easy: { rows: 8, cols: 8, mines: 10 },
   medium: { rows: 12, cols: 12, mines: 20 },
@@ -17,6 +19,8 @@ export let timer = 0;
 export let timerInterval = null;
 export let gameConfig = null;
 export let rewardLink = "";
+
+// firstClick handlers, since firstClick is a local variable that needs to be modified by other modules
 
 let firstClick = true;
 
@@ -56,26 +60,89 @@ export function initGameLogic(config, reward) {
 }
 
 export function placeMines(excludeRow, excludeCol) {
-  let minesPlaced = 0;
-  while (minesPlaced < gameConfig.mines) {
-    const row = Math.floor(Math.random() * gameConfig.rows);
-    const col = Math.floor(Math.random() * gameConfig.cols);
+  const maxAttempts = gameConfig.rows * gameConfig.cols > 400 ? 2000 : 1000;
+  let attempt = 0;
 
-    if ((row === excludeRow && col === excludeCol) || board[row][col] === -1) {
-      continue;
-    }
+  while (attempt < maxAttempts) {
+    attempt++;
 
-    board[row][col] = -1;
-    minesPlaced++;
-  }
-
-  for (let i = 0; i < gameConfig.rows; i++) {
-    for (let j = 0; j < gameConfig.cols; j++) {
-      if (board[i][j] !== -1) {
-        board[i][j] = countAdjacentMines(i, j);
+    // Reset board
+    for (let i = 0; i < gameConfig.rows; i++) {
+      for (let j = 0; j < gameConfig.cols; j++) {
+        board[i][j] = 0;
       }
     }
+
+    // Create forbidden zone around first click
+    const forbiddenZone = new Set();
+    const radius = gameConfig.rows >= 30 ? 2 : 1;
+    for (let i = -radius; i <= radius; i++) {
+      for (let j = -radius; j <= radius; j++) {
+        const row = excludeRow + i;
+        const col = excludeCol + j;
+        if (
+          row >= 0 &&
+          row < gameConfig.rows &&
+          col >= 0 &&
+          col < gameConfig.cols
+        ) {
+          forbiddenZone.add(`${row},${col}`); // ← Added parentheses here!
+        }
+      }
+    }
+
+    // Place mines randomly
+    let minesPlaced = 0;
+    while (minesPlaced < gameConfig.mines) {
+      const row = Math.floor(Math.random() * gameConfig.rows);
+      const col = Math.floor(Math.random() * gameConfig.cols);
+
+      if (forbiddenZone.has(`${row},${col}`) || board[row][col] === -1) {
+        continue;
+      }
+
+      board[row][col] = -1;
+      minesPlaced++;
+    }
+
+    // Calculate numbers for each cell
+    for (let i = 0; i < gameConfig.rows; i++) {
+      for (let j = 0; j < gameConfig.cols; j++) {
+        if (board[i][j] !== -1) {
+          board[i][j] = countAdjacentMines(i, j);
+        }
+      }
+    }
+
+    // Check if this layout is solvable using the solver
+    if (
+      isSolvable(
+        board,
+        gameConfig.rows,
+        gameConfig.cols,
+        excludeRow,
+        excludeCol
+      )
+    ) {
+      console.log(`✓ Found solvable grid on attempt ${attempt}`);
+      return;
+    }
   }
+
+  // Fallback: if we couldn't find a solvable grid, use the last attempt
+  alert(
+    `⚠️ Unable to Generate Solvable Board\n\n` +
+      `After ${maxAttempts} attempts, we couldn't create a board that's guaranteed to be solvable without guessing.\n\n` +
+      `📊 Current density: ${(gameConfig.mines / (gameConfig.cols * gameConfig.rows) * 100).toFixed(1)}%\n` +
+      `(${gameConfig.mines} mines in ${gameConfig.rows}×${gameConfig.cols} = ${
+        gameConfig.rows * gameConfig.cols
+      } cells)\n\n` +
+      `💡 Suggestions:\n` +
+      `• Reduce the number of mines\n` +
+      `• Increase the board size\n` +
+      `• Try generating again (results vary)\n\n` +
+      `The current board uses the last attempt and may require guessing.`
+  );
 }
 
 function countAdjacentMines(row, col) {
