@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const cols = parseInt(customColsInput.value);
       const mines = parseInt(customMinesInput.value);
 
-      // Client-side validation
+      // Client-side input validation
       if (rows < 3 || rows > 30) {
         alert("Please enter a valid number of rows (3-30).");
         return;
@@ -48,8 +48,20 @@ document.addEventListener("DOMContentLoaded", () => {
         alert("Please enter a valid number of columns (3-30).");
         return;
       }
-      if (mines < 1 || mines >= rows * cols) {
-        alert("Please enter a valid number of mines (1 to rows * cols - 1).");
+      if (mines < 1 || mines >= rows * cols || mines > 150) {
+        alert(
+          "Please enter a valid number of mines (1 to rows * cols - 1, max 150)."
+        );
+        return;
+      }
+
+      // Check if physically possible
+      if (mines >= totalCells - forbiddenZoneSize) {
+        alert(
+          `Too many mines! Maximum is ${
+            totalCells - forbiddenZoneSize - 1
+          } for a ${rows}×${cols} board.`
+        );
         return;
       }
 
