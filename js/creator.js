@@ -38,6 +38,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const rows = parseInt(customRowsInput.value);
       const cols = parseInt(customColsInput.value);
       const mines = parseInt(customMinesInput.value);
+      const totalCells = rows * cols;
+      const density = mines / totalCells;
+      const forbiddenZoneSize = rows >= 30 ? 25 : 9; // 5×5 or 3×3
 
       // Client-side input validation
       if (rows < 3 || rows > 30) {
@@ -63,6 +66,39 @@ document.addEventListener("DOMContentLoaded", () => {
           } for a ${rows}×${cols} board.`
         );
         return;
+      }
+
+      // Check solvability likelihood
+      if (density > 0.25) {
+        alert(
+          `⚠️ Very high mine density (${(density * 100).toFixed(1)}%)!\n\n` +
+            `This board may be extremely difficult or impossible to generate. ` +
+            `Generation could take a very long time or fail.\n\n` +
+            `Consider reducing the number of mines.`
+        );
+        return false; // Prevent creation
+      }
+
+      if (density > 0.2) {
+        const proceed = confirm(
+          `⚠️ High mine density (${(density * 100).toFixed(1)}%)\n\n` +
+            `Board generation may take 30-60 seconds or require multiple attempts.\n\n` +
+            `Do you want to continue?`
+        );
+
+        if (!proceed) {
+          return false; // User cancelled
+        }
+      } else if (density > 0.15) {
+        const proceed = confirm(
+          `ℹ️ Moderate mine density (${(density * 100).toFixed(1)}%)\n\n` +
+            `Board generation may take a few seconds.\n\n` +
+            `Do you want to continue?`
+        );
+
+        if (!proceed) {
+          return false; // User cancelled
+        }
       }
 
       config = { rows, cols, mines };
