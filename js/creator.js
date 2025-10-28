@@ -72,8 +72,8 @@ document.addEventListener("DOMContentLoaded", () => {
       if (density > 0.25) {
         alert(
           `⚠️ Very high mine density (${(density * 100).toFixed(1)}%)!\n\n` +
-            `This board may be extremely difficult or impossible to generate. ` +
-            `Generation could take a very long time or fail.\n\n` +
+            `This board may be extremely difficult or impossible to solve. ` +
+            `Verification could take a very long time or fail.\n\n` +
             `Consider reducing the number of mines.`
         );
         return false; // Prevent creation
@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (density > 0.2) {
         const proceed = confirm(
           `⚠️ High mine density (${(density * 100).toFixed(1)}%)\n\n` +
-            `Board generation may take 30-60 seconds or require multiple attempts.\n\n` +
+            `Board verification may take 30-60 seconds or require multiple attempts.\n\n` +
             `Do you want to continue?`
         );
 
@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
       } else if (density > 0.15) {
         const proceed = confirm(
           `ℹ️ Moderate mine density (${(density * 100).toFixed(1)}%)\n\n` +
-            `Board generation may take a few seconds.\n\n` +
+            `Board verification could be slow.\n\n` +
             `Do you want to continue?`
         );
 
