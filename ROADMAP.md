@@ -2,8 +2,9 @@
 
 - Auto-reveal tiles when placing flags and clicking on adjacent, numbered cells
 - Link the "Creator" page from the "Solve" page
-- No guessing mode
 - Option to reveal mines once game is won (or flag the mine cells, something like that)
+- Restart with "R" keypress
+- Right click cycle between Flag, Question Mark, and Nothing
 - SG theme / visual language
 - Light and dark mode
 - QoL features (research MineSweeper-specific communities)
