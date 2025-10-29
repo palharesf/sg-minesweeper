@@ -1,5 +1,7 @@
 // Helper functions for URL parameter parsing and encoding/decoding game configurations
 
+// ============ Compression and Encryption Helper Functions ============
+
 /**
  * Converts Uint8Array to base64 string safely
  */
@@ -18,6 +20,10 @@ function arrayBufferToBase64(buffer) {
  */
 
 import pako from "https://cdn.jsdelivr.net/npm/pako@2.0.4/+esm";
+
+// ============ End Compression and Encryption Functions ============
+
+// ============ Game Configuration Encoding and Decoding Functions ============
 
 /**
  * Encodes game configuration and reward URL into a URL hash string.
@@ -82,6 +88,8 @@ export function decodeGameConfig(hash) {
   }
   return null;
 }
+
+// ============ End Encoding and Decoding Functions ============
 
 // ============ localStorage Helper Functions ============
 

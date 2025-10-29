@@ -36,6 +36,20 @@ const messageEl = document.getElementById("message");
 const hiddenContentEl = document.getElementById("hidden-content");
 const restartButtonEl = document.getElementById("restart-button");
 
+// Event listeners
+restartButtonEl.addEventListener("click", () => initGameUI(gameConfig, rewardLink));
+
+document
+  .getElementById("rules-container")
+  .addEventListener("click", function () {
+    const rulesList = document.getElementById("rules-list");
+    const container = document.getElementById("rules-container");
+
+    rulesList.classList.toggle("visible");
+    container.classList.toggle("expanded");
+  });
+
+// Public Functions
 export function initGameUI(config, reward) {
   initGameLogic(config, reward);
   renderBoard();
@@ -50,6 +64,7 @@ export function initGameUI(config, reward) {
   revealSolvedSecrets();
 }
 
+// Private Functions
 function renderBoard() {
   gameBoardEl.innerHTML = "";
   
