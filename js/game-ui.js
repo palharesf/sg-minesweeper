@@ -60,6 +60,9 @@ export function initGameUI(config, reward) {
   hiddenContentEl.classList.remove("visible");
   restartButtonEl.classList.remove("visible");
 
+  // Re-enable the game board in case it was disabled
+  enableGameBoard();
+
   // Check if this puzzle was already solved
   revealSolvedSecrets();
 }
@@ -251,4 +254,26 @@ function showReplayOption(puzzleId) {
   buttonContainer.className = "replay-button-container";
   buttonContainer.appendChild(replayButton);
   hiddenContentEl.insertBefore(buttonContainer, hiddenContentEl.firstChild);
+}
+
+function disableGameBoard() {
+  // Add a CSS class to visually indicate the board is disabled
+  gameBoardEl.classList.add("disabled");
+
+  // Remove pointer events to prevent any interaction
+  gameBoardEl.style.pointerEvents = "none";
+
+  // Optional: Add a semi-transparent overlay effect via CSS
+  gameBoardEl.style.opacity = "0.6";
+}
+
+function enableGameBoard() {
+  // Remove the disabled class
+  gameBoardEl.classList.remove("disabled");
+
+  // Enable pointer events
+  gameBoardEl.style.pointerEvents = "auto";
+
+  // Reset opacity
+  gameBoardEl.style.opacity = "1";
 }
