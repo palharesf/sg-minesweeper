@@ -221,3 +221,34 @@ function revealSolvedSecrets() {
     showReplayOption(currentPuzzleId);
   }
 }
+
+function showReplayOption(puzzleId) {
+  const replayButton = document.createElement("button");
+  replayButton.textContent = "Play this puzzle again";
+  replayButton.className = "replay-button";
+  replayButton.addEventListener("click", () => {
+    // Confirm with the user before clearing progress
+    const confirmed = confirm(
+      "This will remove this puzzle from your solved list and hide the secret again. " +
+        "You'll need to solve it again to reveal the secret. Continue?"
+    );
+
+    if (confirmed) {
+      // Remove this specific puzzle from solved list
+      const solvedPuzzles = JSON.parse(
+        localStorage.getItem("solvedPuzzles") || "[]"
+      );
+      const filtered = solvedPuzzles.filter((id) => id !== puzzleId);
+      localStorage.setItem("solvedPuzzles", JSON.stringify(filtered));
+
+      // Reload the game
+      initGameUI(gameConfig, rewardLink);
+    }
+  });
+
+  // Insert button in the hidden content area instead of the message
+  const buttonContainer = document.createElement("div");
+  buttonContainer.className = "replay-button-container";
+  buttonContainer.appendChild(replayButton);
+  hiddenContentEl.insertBefore(buttonContainer, hiddenContentEl.firstChild);
+}
