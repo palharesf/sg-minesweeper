@@ -1,3 +1,13 @@
+## version 1.2.0 - 2025-10-29
+- Implemented localStorage strategy to track solved puzzles and display them on the game page
+    - localStorage helper functions on `utils.js`
+    - Marking as solved, checking if solved (`game-ui.js`)
+- Added a "Replay" button to the game page, which clears localStorage
+    - Including associated styles
+- Options to enable and disable the game board
+- General formatting and readibility improvements
+- Misc style improvements
+
 ## version 1.1.0 - 2025-10-28
 - Added a solver module, which can be used to check if a given game configuration is solvable without guessing
 - Integrated the solver into the placeMines routine to ensure created games are solvable

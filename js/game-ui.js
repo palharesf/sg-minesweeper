@@ -21,6 +21,12 @@ import {
   getRevealed,
 } from "./game-logic.js";
 
+import {
+  encodeGameConfig,
+  isPuzzleSolved,
+  markPuzzleAsSolved,
+} from "./utils.js";
+
 // DOM elements
 const gameBoardEl = document.getElementById("game-board");
 const flagCountEl = document.getElementById("flag-count");
@@ -30,6 +36,20 @@ const messageEl = document.getElementById("message");
 const hiddenContentEl = document.getElementById("hidden-content");
 const restartButtonEl = document.getElementById("restart-button");
 
+// Event listeners
+restartButtonEl.addEventListener("click", () => initGameUI(gameConfig, rewardLink));
+
+document
+  .getElementById("rules-container")
+  .addEventListener("click", function () {
+    const rulesList = document.getElementById("rules-list");
+    const container = document.getElementById("rules-container");
+
+    rulesList.classList.toggle("visible");
+    container.classList.toggle("expanded");
+  });
+
+// Public Functions
 export function initGameUI(config, reward) {
   initGameLogic(config, reward);
   renderBoard();
@@ -39,8 +59,15 @@ export function initGameUI(config, reward) {
   messageEl.className = "message";
   hiddenContentEl.classList.remove("visible");
   restartButtonEl.classList.remove("visible");
+
+  // Re-enable the game board in case it was disabled
+  enableGameBoard();
+
+  // Check if this puzzle was already solved
+  revealSolvedSecrets();
 }
 
+// Private Functions
 function renderBoard() {
   gameBoardEl.innerHTML = "";
   
@@ -135,6 +162,10 @@ function endGameUI(won) {
     messageEl.className = "message win";
     hiddenContentEl.classList.add("visible");
     document.getElementById("reward-content").textContent = rewardLink;
+
+    // Mark this puzzle as solved in localStorage
+    const currentPuzzleId = encodeGameConfig(gameConfig, rewardLink);
+    markPuzzleAsSolved(currentPuzzleId);
   } else {
     messageEl.textContent = "💥 Game Over! You hit a mine.";
     messageEl.className = "message lose";
@@ -179,14 +210,70 @@ function calculateCellSize() {
   return Math.max(calculatedSize, minCellSize);
 }
 
-restartButtonEl.addEventListener("click", () => initGameUI(gameConfig, rewardLink));
+function revealSolvedSecrets() {
+  const currentPuzzleId = encodeGameConfig(gameConfig, rewardLink);
+  if (isPuzzleSolved(currentPuzzleId)) {
+    // Auto-reveal the secret for previously solved puzzles
+    messageEl.textContent = "✨ Previously solved! Secret revealed below.";
+    messageEl.className = "message win";
+    hiddenContentEl.classList.add("visible");
+    document.getElementById("reward-content").textContent = rewardLink;
 
-document
-  .getElementById("rules-container")
-  .addEventListener("click", function () {
-    const rulesList = document.getElementById("rules-list");
-    const container = document.getElementById("rules-container");
+    // Enable the replay button and disable the game board (so the only way to play it again is by resetting it)
+    disableGameBoard();
+    showReplayOption(currentPuzzleId);
+  }
+}
 
-    rulesList.classList.toggle("visible");
-    container.classList.toggle("expanded");
+function showReplayOption(puzzleId) {
+  const replayButton = document.createElement("button");
+  replayButton.textContent = "Play this puzzle again";
+  replayButton.className = "replay-button";
+  replayButton.addEventListener("click", () => {
+    // Confirm with the user before clearing progress
+    const confirmed = confirm(
+      "This will remove this puzzle from your solved list and hide the secret again. " +
+        "You'll need to solve it again to reveal the secret. Continue?"
+    );
+
+    if (confirmed) {
+      // Remove this specific puzzle from solved list
+      const solvedPuzzles = JSON.parse(
+        localStorage.getItem("solvedPuzzles") || "[]"
+      );
+      const filtered = solvedPuzzles.filter((id) => id !== puzzleId);
+      localStorage.setItem("solvedPuzzles", JSON.stringify(filtered));
+
+      // Reload the game
+      initGameUI(gameConfig, rewardLink);
+    }
   });
+
+  // Insert button in the hidden content area instead of the message
+  const buttonContainer = document.createElement("div");
+  buttonContainer.className = "replay-button-container";
+  buttonContainer.appendChild(replayButton);
+  hiddenContentEl.insertBefore(buttonContainer, hiddenContentEl.firstChild);
+}
+
+function disableGameBoard() {
+  // Add a CSS class to visually indicate the board is disabled
+  gameBoardEl.classList.add("disabled");
+
+  // Remove pointer events to prevent any interaction
+  gameBoardEl.style.pointerEvents = "none";
+
+  // Optional: Add a semi-transparent overlay effect via CSS
+  gameBoardEl.style.opacity = "0.6";
+}
+
+function enableGameBoard() {
+  // Remove the disabled class
+  gameBoardEl.classList.remove("disabled");
+
+  // Enable pointer events
+  gameBoardEl.style.pointerEvents = "auto";
+
+  // Reset opacity
+  gameBoardEl.style.opacity = "1";
+}
