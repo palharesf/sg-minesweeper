@@ -82,3 +82,37 @@ export function decodeGameConfig(hash) {
   }
   return null;
 }
+
+// ============ localStorage Helper Functions ============
+
+/**
+ * Checks if a puzzle has been solved before.
+ * @param {string} puzzleId - The unique puzzle identifier.
+ * @returns {boolean} True if the puzzle was previously solved.
+ */
+export function isPuzzleSolved(puzzleId) {
+  const solvedPuzzles = JSON.parse(localStorage.getItem('solvedPuzzles') || '[]');
+  return solvedPuzzles.includes(puzzleId);
+}
+
+/**
+ * Marks a puzzle as solved in localStorage.
+ * @param {string} puzzleId - The unique puzzle identifier.
+ */
+export function markPuzzleAsSolved(puzzleId) {
+  const solvedPuzzles = JSON.parse(localStorage.getItem('solvedPuzzles') || '[]');
+  if (!solvedPuzzles.includes(puzzleId)) {
+    solvedPuzzles.push(puzzleId);
+    localStorage.setItem('solvedPuzzles', JSON.stringify(solvedPuzzles));
+  }
+}
+
+/**
+ * Clears all solved puzzle progress from localStorage.
+ * Useful for a "Reset Progress" feature, althought that's not currently implemented or included in the roadmap.
+ */
+export function clearSolvedPuzzles() {
+  localStorage.removeItem('solvedPuzzles');
+}
+
+// ============ End localStorage Functions ============
