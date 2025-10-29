@@ -21,6 +21,12 @@ import {
   getRevealed,
 } from "./game-logic.js";
 
+import {
+  encodeGameConfig,
+  isPuzzleSolved,
+  markPuzzleAsSolved,
+} from "./utils.js";
+
 // DOM elements
 const gameBoardEl = document.getElementById("game-board");
 const flagCountEl = document.getElementById("flag-count");
@@ -39,6 +45,9 @@ export function initGameUI(config, reward) {
   messageEl.className = "message";
   hiddenContentEl.classList.remove("visible");
   restartButtonEl.classList.remove("visible");
+
+  // Check if this puzzle was already solved
+  revealSolvedSecrets();
 }
 
 function renderBoard() {
@@ -135,6 +144,10 @@ function endGameUI(won) {
     messageEl.className = "message win";
     hiddenContentEl.classList.add("visible");
     document.getElementById("reward-content").textContent = rewardLink;
+
+    // Mark this puzzle as solved in localStorage
+    const currentPuzzleId = encodeGameConfig(gameConfig, rewardLink);
+    markPuzzleAsSolved(currentPuzzleId);
   } else {
     messageEl.textContent = "💥 Game Over! You hit a mine.";
     messageEl.className = "message lose";
@@ -179,14 +192,17 @@ function calculateCellSize() {
   return Math.max(calculatedSize, minCellSize);
 }
 
-restartButtonEl.addEventListener("click", () => initGameUI(gameConfig, rewardLink));
+function revealSolvedSecrets() {
+  const currentPuzzleId = encodeGameConfig(gameConfig, rewardLink);
+  if (isPuzzleSolved(currentPuzzleId)) {
+    // Auto-reveal the secret for previously solved puzzles
+    messageEl.textContent = "✨ Previously solved! Secret revealed below.";
+    messageEl.className = "message win";
+    hiddenContentEl.classList.add("visible");
+    document.getElementById("reward-content").textContent = rewardLink;
 
-document
-  .getElementById("rules-container")
-  .addEventListener("click", function () {
-    const rulesList = document.getElementById("rules-list");
-    const container = document.getElementById("rules-container");
-
-    rulesList.classList.toggle("visible");
-    container.classList.toggle("expanded");
-  });
+    // Enable the replay button and disable the game board (so the only way to play it again is by resetting it)
+    disableGameBoard();
+    showReplayOption(currentPuzzleId);
+  }
+}
