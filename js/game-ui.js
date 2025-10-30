@@ -96,17 +96,87 @@ function renderBoard() {
 }
 
 function handleCellClick(row, col) {
-  if (gameOver || revealed[row][col] || flagged[row][col]) return;
+  // Prevents clicks if game is over or if the cell is already flagged
+  if (gameOver || flagged[row][col]) return;
 
+  // Place mines on first click
   if (isFirstClick()) {
     placeMines(row, col);
     setFirstClick(false);
     startTimerLogic(updateTimerUI);
   }
 
+  // Chording: If clicking on a revealed numbered cell
+  if (revealed[row][col] && !flagged[row][col]) {
+    const cellValue = getBoard()[row][col];
+
+    // Only chord on numbered cells
+    if (cellValue > 0) {
+      // Count adjacent flags
+      let adjacentFlags = 0;
+      const neighbors = [];
+
+      for (let i = -1; i <= 1; i++) {
+        for (let j = -1; j <= 1; j++) {
+          if (i === 0 && j === 0) continue;
+
+          const newRow = row + i;
+          const newCol = col + j;
+
+          if (
+            newRow >= 0 &&
+            newRow < gameConfig.rows &&
+            newCol >= 0 &&
+            newCol < gameConfig.cols
+          ) {
+            neighbors.push({ row: newRow, col: newCol });
+            if (flagged[newRow][newCol]) {
+              adjacentFlags++;
+            }
+          }
+        }
+      }
+
+      // If flag count matches the number, reveal all unrevealed neighbors
+      if (adjacentFlags === cellValue) {
+        neighbors.forEach(({ row: nRow, col: nCol }) => {
+          if (!revealed[nRow][nCol] && !flagged[nRow][nCol]) {
+            const revealedCells = revealCellLogic(nRow, nCol);
+            revealedCells.forEach((cellData) => {
+              const cellEl = document.querySelector(
+                `[data-row="${cellData.row}"][data-col="${cellData.col}"]`
+              );
+              cellEl.classList.add("revealed");
+              if (cellData.value === -1) {
+                cellEl.textContent = "💣";
+                cellEl.classList.add("mine");
+              } else if (cellData.value > 0) {
+                cellEl.textContent = cellData.value;
+                cellEl.classList.add(`number-${cellData.value}`);
+              }
+            });
+          }
+        });
+
+        // Check game state after chording
+        if (gameOver) {
+          endGameUI(gameWon);
+          return;
+        } else {
+          checkWinUI();
+          return;
+        }
+      }
+    }
+    return; // Don't proceed with normal click logic for revealed cells
+  }
+
+  // If not chording, proceed with normal click
   const revealedCells = revealCellLogic(row, col);
-  revealedCells.forEach(cellData => {
-    const cellEl = document.querySelector(`[data-row="${cellData.row}"][data-col="${cellData.col}"]`);
+  revealedCells.forEach((cellData) => {
+    const cellEl = document.querySelector(
+      `[data-row="${cellData.row}"][data-col="${cellData.col}"]`
+    );
     cellEl.classList.add("revealed");
     if (cellData.value === -1) {
       cellEl.textContent = "💣";
