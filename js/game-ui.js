@@ -37,7 +37,9 @@ const hiddenContentEl = document.getElementById("hidden-content");
 const restartButtonEl = document.getElementById("restart-button");
 
 // Event listeners
-restartButtonEl.addEventListener("click", () => initGameUI(gameConfig, rewardLink));
+restartButtonEl.addEventListener("click", () =>
+  initGameUI(gameConfig, rewardLink)
+);
 
 document
   .getElementById("rules-container")
@@ -48,6 +50,16 @@ document
     rulesList.classList.toggle("visible");
     container.classList.toggle("expanded");
   });
+
+let resizeTimeout;
+window.addEventListener("resize", () => {
+  clearTimeout(resizeTimeout);
+  resizeTimeout = setTimeout(() => {
+    if (gameConfig) {
+      renderBoard();
+    }
+  }, 250);
+});
 
 // Public Functions
 export function initGameUI(config, reward) {
