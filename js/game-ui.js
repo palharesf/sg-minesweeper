@@ -82,7 +82,7 @@ export function initGameUI(config, reward) {
 // Private Functions
 function renderBoard() {
   gameBoardEl.innerHTML = "";
-  
+
   const cellSize = calculateCellSize();
   gameBoardEl.style.gridTemplateColumns = `repeat(${gameConfig.cols}, ${cellSize}px)`;
   gameBoardEl.style.setProperty("--cell-size", `${cellSize}px`);
@@ -210,7 +210,9 @@ function handleRightClick(row, col) {
   if (gameOver || revealed[row][col]) return;
 
   if (toggleFlagLogic(row, col)) {
-    const cellEl = document.querySelector(`[data-row="${row}"][data-col="${col}"]`);
+    const cellEl = document.querySelector(
+      `[data-row="${row}"][data-col="${col}"]`
+    );
     if (flagged[row][col]) {
       cellEl.classList.add("flagged");
       cellEl.textContent = "🚩";
@@ -277,7 +279,9 @@ function calculateCellSize() {
   const minCellSize = 18;
   const padding = 40; // Account for container padding
 
-  const containerWidth = gameBoardEl.parentElement.clientWidth - padding;
+  // Using window.innerWidth instead of parentElement.clientWidth for better mobile support
+  const viewportWidth = window.innerWidth;
+  const containerWidth = Math.min(viewportWidth - padding, 640); // Don't exceed max container width
   const containerHeight = window.innerHeight - 300; // Reserve space for header and controls
 
   const cellWidthByContainer = Math.floor(containerWidth / gameConfig.cols);
