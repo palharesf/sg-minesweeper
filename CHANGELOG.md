@@ -1,3 +1,6 @@
+## version 1.3.2 - 2025-10-30
+- Updated game rules to explain question marks
+
 ## version 1.3.1 - 2025-10-30
 - Bugfix: 3x3x1 boards were not solvable due to being entirely taken by the forbidden zone
 - Added a navigation link from the game page to the creator page
