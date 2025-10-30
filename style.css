@@ -395,3 +395,23 @@ button.restart.visible {
 .replay-button:hover {
   background: #f57c00;
 }
+
+/* Navigation link for creating a new game */
+.new-game-link {
+  margin-top: -10px;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.new-game-link a {
+  color: #64b5f6;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.new-game-link a:hover {
+  color: #90caf9;
+  text-decoration: underline;
+}
