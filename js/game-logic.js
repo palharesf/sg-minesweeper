@@ -90,7 +90,7 @@ export function placeMines(excludeRow, excludeCol) {
           col >= 0 &&
           col < gameConfig.cols
         ) {
-          forbiddenZone.add(`${row},${col}`); // ← Added parentheses here!
+          forbiddenZone.add(`${row},${col}`);
         }
       }
     }
@@ -199,7 +199,20 @@ export function revealCellLogic(row, col) {
 
 export function toggleFlagLogic(row, col) {
   if (revealed[row][col]) return false;
-  flagged[row][col] = !flagged[row][col];
+
+  // Cycle through three states: empty → flagged → question mark → empty
+  if (!flagged[row][col] && !questionMark[row][col]) {
+    // State 1: Empty → Flagged
+    flagged[row][col] = true;
+  } else if (flagged[row][col]) {
+    // State 2: Flagged → Question Mark
+    flagged[row][col] = false;
+    questionMark[row][col] = true;
+  } else {
+    // State 3: Question Mark → Empty
+    questionMark[row][col] = false;
+  }
+
   return true;
 }
 
