@@ -3,6 +3,7 @@
 import {
   revealed,
   flagged,
+  questionMark,
   gameOver,
   gameWon,
   isFirstClick,
@@ -216,8 +217,12 @@ function handleRightClick(row, col) {
     if (flagged[row][col]) {
       cellEl.classList.add("flagged");
       cellEl.textContent = "🚩";
-    } else {
+    } else if (questionMark[row][col]) {
       cellEl.classList.remove("flagged");
+      cellEl.classList.add("question-mark");
+      cellEl.textContent = "❓";
+    } else {
+      cellEl.classList.remove("question-mark");
       cellEl.textContent = "";
     }
     updateFlagCountUI();

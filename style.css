@@ -106,7 +106,7 @@ button:hover {
   user-select: none;
 }
 
-.cell:hover:not(.revealed):not(.flagged) {
+.cell:hover:not(.revealed):not(.flagged):not(.question-mark) {
   /* Slightly lighter on hover, maintaining the dark theme */
   background: #454b52;
 }
@@ -121,6 +121,11 @@ button:hover {
 .cell.flagged {
   /* More muted gold that fits the darker palette - less "bright yellow" */
   background: #d89e4f;
+}
+
+.cell.question-mark {
+  /* Tentative guess - cool neutral gray-blue, more subdued */
+  background: #6a7b8c;
 }
 
 .cell.mine {

@@ -12,6 +12,7 @@ export const configs = {
 export let board = [];
 export let revealed = [];
 export let flagged = [];
+export let questionMark = [];
 export let gameOver = false;
 export let gameWon = false;
 export let mineCount = 0;
@@ -38,6 +39,7 @@ export function initGameLogic(config, reward) {
   board = [];
   revealed = [];
   flagged = [];
+  questionMark = [];
   gameOver = false;
   gameWon = false;
   setFirstClick(true);
@@ -51,10 +53,12 @@ export function initGameLogic(config, reward) {
     board[i] = [];
     revealed[i] = [];
     flagged[i] = [];
+    questionMark[i] = [];
     for (let j = 0; j < config.cols; j++) {
       board[i][j] = 0;
       revealed[i][j] = false;
       flagged[i][j] = false;
+      questionMark[i][j] = false;
     }
   }
 }
