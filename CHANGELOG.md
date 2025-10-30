@@ -1,3 +1,9 @@
+## version 1.3.1 - 2025-10-30
+- Bugfix: 3x3x1 boards were not solvable due to being entirely taken by the forbidden zone
+- Added a navigation link from the game page to the creator page
+- Implemented SteamGifts visual identity
+- Implemented a question mark cycling for cells you're unsure about
+
 ## version 1.3.0 - 2025-10-30
 - Implemented left-click chording logic
     - Chording allow users to reveal cells around a numbered cell by flagging all surrounding mines
