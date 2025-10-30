@@ -11,24 +11,30 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  /* SteamGifts uses a dark, nearly black background instead of bright gradients */
+  background: #1e2329;
   padding: 20px;
   position: relative;
 }
 
 .container {
-  background: white;
+  /* Dark card background matching SteamGifts' container style */
+  background: #2a2e33;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  /* More subtle shadow with darker tones for depth without harshness */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   width: 100%;
   max-width: 640px;
   margin-bottom: 60px;
+  /* SteamGifts uses subtle borders to define container edges */
+  border: 1px solid #1a1d23;
 }
 
 h1 {
   text-align: center;
-  color: #333;
+  /* Light text color for dark background - SteamGifts uses off-white tones */
+  color: #d4d4d4;
   margin-bottom: 20px;
 }
 
@@ -37,13 +43,17 @@ h1 {
   justify-content: space-between;
   margin-bottom: 20px;
   padding: 10px;
-  background: #f5f5f5;
+  /* Slightly darker panel background for subtle depth layering */
+  background: #23272d;
   border-radius: 5px;
+  /* Dark border instead of light, maintaining the low-contrast aesthetic */
+  border: 1px solid #1a1d23;
 }
 
 .info-item {
   font-weight: bold;
-  color: #555;
+  /* Medium gray text - easier on eyes than pure white */
+  color: #c5c5c5;
 }
 
 .controls {
@@ -58,19 +68,22 @@ button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  background: #667eea;
+  /* SteamGifts signature teal-blue button color */
+  background: #5cb3cc;
   color: white;
   transition: background 0.3s;
 }
 
 button:hover {
-  background: #5568d3;
+  /* Lighter teal on hover - subtle but noticeable brightening */
+  background: #6bc5de;
 }
 
 #game-board {
   display: grid;
   gap: 1px;
-  background: #999;
+  /* Darker grid lines between cells */
+  background: #1a1d23;
   padding: 2px;
   border-radius: 5px;
   margin: 0 auto;
@@ -80,8 +93,10 @@ button:hover {
 .cell {
   width: var(--cell-size, 40px);
   height: var(--cell-size, 40px);
-  background: #ddd;
-  border: 1px outset #fff;
+  /* Darker unrevealed cell background */
+  background: #3a3f45;
+  /* Flatter border style - SteamGifts prefers subtle definition over 3D effects */
+  border: 1px solid #4a5057;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -92,46 +107,51 @@ button:hover {
 }
 
 .cell:hover:not(.revealed):not(.flagged) {
-  background: #ccc;
+  /* Slightly lighter on hover, maintaining the dark theme */
+  background: #454b52;
 }
 
 .cell.revealed {
-  background: #f5f5f5;
-  border: none;
+  /* Revealed cells are slightly lighter but still dark */
+  background: #2c3135;
+  border: 1px solid #23272d;
   cursor: default;
 }
 
 .cell.flagged {
-  background: #ffd700;
+  /* More muted gold that fits the darker palette - less "bright yellow" */
+  background: #d89e4f;
 }
 
 .cell.mine {
-  background: #ff4444;
+  /* Darker red that doesn't clash with the muted aesthetic */
+  background: #c85050;
 }
 
+/* Number colors adjusted for dark background - they need to be lighter and more visible */
 .cell.number-1 {
-  color: #0000ff;
+  color: #7fb3d5;
 }
 .cell.number-2 {
-  color: #008000;
+  color: #82c785;
 }
 .cell.number-3 {
-  color: #ff0000;
+  color: #e57373;
 }
 .cell.number-4 {
-  color: #000080;
+  color: #9fa8da;
 }
 .cell.number-5 {
-  color: #800000;
+  color: #d89e4f;
 }
 .cell.number-6 {
-  color: #008080;
+  color: #64b5f6;
 }
 .cell.number-7 {
-  color: #000000;
+  color: #b0b0b0;
 }
 .cell.number-8 {
-  color: #808080;
+  color: #999999;
 }
 
 .hidden-content, button.restart {
@@ -153,12 +173,14 @@ button.restart.visible {
 }
 
 .hidden-content h2 {
-  color: #2e7d32;
+  /* Lighter green for dark background visibility */
+  color: #81c784;
   margin-bottom: 10px;
 }
 
 .hidden-content a {
-  color: #1565c0;
+  /* Lighter blue links that stand out on dark backgrounds */
+  color: #64b5f6;
   font-weight: bold;
   word-break: break-all;
 }
@@ -172,11 +194,13 @@ button.restart.visible {
 }
 
 .message.win {
-  color: #2e7d32;
+  /* Success green adjusted for dark theme */
+  color: #81c784;
 }
 
 .message.lose {
-  color: #c62828;
+  /* Error red adjusted for dark theme */
+  color: #e57373;
 }
 
 /* Creator Page Styles */
@@ -189,26 +213,32 @@ button.restart.visible {
 
 .creator-form label {
   font-weight: bold;
-  color: #555;
+  color: #c5c5c5;
 }
 
 .creator-form select,
 .creator-form input[type="text"] {
   padding: 10px;
   font-size: 16px;
-  border: 1px solid #ccc;
+  /* Dark input fields matching SteamGifts form styling */
+  background: #23272d;
+  border: 1px solid #1a1d23;
   border-radius: 5px;
   width: 100%;
-  max-width: 400px; /* Limit width for better readability */
+  max-width: 400px;
+  /* Light text in dark inputs */
+  color: #d4d4d4;
 }
 
 .creator-form input[type="url"] {
   padding: 10px;
   font-size: 16px;
-  border: 1px solid #ccc;
+  background: #23272d;
+  border: 1px solid #1a1d23;
   border-radius: 5px;
   width: 100%;
-  max-width: 400px; /* Limit width for better readability */
+  max-width: 400px;
+  color: #d4d4d4;
 }
 
 .creator-form input[type="url"]#reward-url,
@@ -222,36 +252,37 @@ button.restart.visible {
 }
 
 .generated-link-panel {
-  background: #f0f8ff;
+  /* Dark panel with teal accent border */
+  background: #23272d;
   padding: 15px;
   border-radius: 5px;
   margin-top: 20px;
-  border: 1px solid #a7d9ff;
+  border: 1px solid #5cb3cc;
 }
 
 .generated-link-panel p {
   margin-bottom: 10px;
   font-weight: bold;
-  color: #333;
+  color: #d4d4d4;
 }
 
 .generated-link-panel input[type="text"] {
-  background: #e9f5ff;
-  border: 1px solid #87cefa;
+  background: #2a2e33;
+  border: 1px solid #3a3f45;
+  color: #c5c5c5;
   cursor: text;
   margin-bottom: 10px;
 }
 
 .generated-link-panel button {
-  background: #2196f3;
+  background: #5cb3cc;
 }
 
 .generated-link-panel button:hover {
-  background: #1976d2;
+  background: #6bc5de;
 }
 
 /* Footer Styles */
-
 .footer {
   position: absolute;
   bottom: 0;
@@ -259,31 +290,33 @@ button.restart.visible {
   width: 100%;
   text-align: center;
   padding: 10px;
-  background: #333;
-  color: #fff;
+  /* Even darker footer background for subtle separation */
+  background: #1a1d23;
+  color: #999;
   font-size: 12px;
+  border-top: 1px solid #23272d;
 }
 
 .footer a {
-  color: inherit;
+  color: #5cb3cc;
   text-decoration: none;
 }
 
 .footer a:hover {
-  color: inherit;
-  text-decoration: none;
+  color: #6bc5de;
+  text-decoration: underline;
 }
 
 /* Rules Container Styles */
-
 .rules-container {
-  width: 600px; /* Match the max-width of the game container */
+  width: 600px;
   cursor: pointer;
 }
 
 .rules-container h3 {
   text-align: center;
   margin-bottom: 0;
+  color: #d4d4d4;
 }
 
 .rules-container ul {
@@ -307,6 +340,7 @@ button.restart.visible {
 .rules-container li {
   font-size: 0.75em;
   margin-bottom: 5px;
+  color: #c5c5c5;
 }
 
 /* Custom Difficulty Selector Styles */
@@ -320,7 +354,7 @@ button.restart.visible {
 }
 
 #custom-difficulty-inputs:not(.hidden-content) {
-  display: grid; /* Show as grid when not hidden */
+  display: grid;
 }
 
 #custom-difficulty-inputs label {
@@ -333,8 +367,10 @@ button.restart.visible {
   padding: 8px;
   font-size: 1em;
   max-width: 80px;
-  border: 1px solid #999;
+  background: #23272d;
+  border: 1px solid #1a1d23;
   border-radius: 5px;
+  color: #d4d4d4;
 }
 
 /* Tooltip styling */
@@ -361,8 +397,9 @@ button.restart.visible {
   left: 50%;
   transform: translateX(-50%);
   padding: 8px 12px;
-  background: #333;
-  color: white;
+  /* Darker tooltip matching the overall theme */
+  background: #1a1d23;
+  color: #c5c5c5;
   border-radius: 4px;
   font-size: 0.85em;
   white-space: nowrap;
@@ -371,6 +408,7 @@ button.restart.visible {
   transition: opacity 0.2s;
   margin-bottom: 5px;
   z-index: 1000;
+  border: 1px solid #2a2e33;
 }
 
 [data-tooltip]:hover::before {
@@ -382,18 +420,20 @@ button.restart.visible {
   text-align: center;
   margin-bottom: 15px;
   padding-bottom: 15px;
-  border-bottom: 2px solid #e0e0e0;
+  /* Dark separator line instead of light gray */
+  border-bottom: 2px solid #23272d;
 }
 
 .replay-button {
   padding: 8px 16px;
   font-size: 14px;
-  background: #ff9800;
+  /* More muted orange that fits the palette */
+  background: #d89e4f;
   margin: 10px 0;
 }
 
 .replay-button:hover {
-  background: #f57c00;
+  background: #e5ab64;
 }
 
 /* Navigation link for creating a new game */
@@ -412,6 +452,6 @@ button.restart.visible {
 }
 
 .new-game-link a:hover {
-  color: #90caf9;
+  color: #81c9f7;
   text-decoration: underline;
 }
