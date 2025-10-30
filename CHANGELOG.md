@@ -1,3 +1,12 @@
+## version 1.3.0 - 2025-10-30
+- Implemented left-click chording logic
+    - Chording allow users to reveal cells around a numbered cell by flagging all surrounding mines
+    - Chording with a misplaced flag will detonate a mine
+- Updated game rules to explain chording
+- Visual change to reduce gap between cells
+- Added reactive styles to the game board
+- Added resizing functionality for mobile device orientation change
+
 ## version 1.2.0 - 2025-10-29
 - Implemented localStorage strategy to track solved puzzles and display them on the game page
     - localStorage helper functions on `utils.js`

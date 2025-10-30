@@ -37,7 +37,9 @@ const hiddenContentEl = document.getElementById("hidden-content");
 const restartButtonEl = document.getElementById("restart-button");
 
 // Event listeners
-restartButtonEl.addEventListener("click", () => initGameUI(gameConfig, rewardLink));
+restartButtonEl.addEventListener("click", () =>
+  initGameUI(gameConfig, rewardLink)
+);
 
 document
   .getElementById("rules-container")
@@ -48,6 +50,16 @@ document
     rulesList.classList.toggle("visible");
     container.classList.toggle("expanded");
   });
+
+let resizeTimeout;
+window.addEventListener("resize", () => {
+  clearTimeout(resizeTimeout);
+  resizeTimeout = setTimeout(() => {
+    if (gameConfig) {
+      renderBoard();
+    }
+  }, 250);
+});
 
 // Public Functions
 export function initGameUI(config, reward) {
@@ -70,7 +82,7 @@ export function initGameUI(config, reward) {
 // Private Functions
 function renderBoard() {
   gameBoardEl.innerHTML = "";
-  
+
   const cellSize = calculateCellSize();
   gameBoardEl.style.gridTemplateColumns = `repeat(${gameConfig.cols}, ${cellSize}px)`;
   gameBoardEl.style.setProperty("--cell-size", `${cellSize}px`);
@@ -96,17 +108,87 @@ function renderBoard() {
 }
 
 function handleCellClick(row, col) {
-  if (gameOver || revealed[row][col] || flagged[row][col]) return;
+  // Prevents clicks if game is over or if the cell is already flagged
+  if (gameOver || flagged[row][col]) return;
 
+  // Place mines on first click
   if (isFirstClick()) {
     placeMines(row, col);
     setFirstClick(false);
     startTimerLogic(updateTimerUI);
   }
 
+  // Chording: If clicking on a revealed numbered cell
+  if (revealed[row][col] && !flagged[row][col]) {
+    const cellValue = getBoard()[row][col];
+
+    // Only chord on numbered cells
+    if (cellValue > 0) {
+      // Count adjacent flags
+      let adjacentFlags = 0;
+      const neighbors = [];
+
+      for (let i = -1; i <= 1; i++) {
+        for (let j = -1; j <= 1; j++) {
+          if (i === 0 && j === 0) continue;
+
+          const newRow = row + i;
+          const newCol = col + j;
+
+          if (
+            newRow >= 0 &&
+            newRow < gameConfig.rows &&
+            newCol >= 0 &&
+            newCol < gameConfig.cols
+          ) {
+            neighbors.push({ row: newRow, col: newCol });
+            if (flagged[newRow][newCol]) {
+              adjacentFlags++;
+            }
+          }
+        }
+      }
+
+      // If flag count matches the number, reveal all unrevealed neighbors
+      if (adjacentFlags === cellValue) {
+        neighbors.forEach(({ row: nRow, col: nCol }) => {
+          if (!revealed[nRow][nCol] && !flagged[nRow][nCol]) {
+            const revealedCells = revealCellLogic(nRow, nCol);
+            revealedCells.forEach((cellData) => {
+              const cellEl = document.querySelector(
+                `[data-row="${cellData.row}"][data-col="${cellData.col}"]`
+              );
+              cellEl.classList.add("revealed");
+              if (cellData.value === -1) {
+                cellEl.textContent = "💣";
+                cellEl.classList.add("mine");
+              } else if (cellData.value > 0) {
+                cellEl.textContent = cellData.value;
+                cellEl.classList.add(`number-${cellData.value}`);
+              }
+            });
+          }
+        });
+
+        // Check game state after chording
+        if (gameOver) {
+          endGameUI(gameWon);
+          return;
+        } else {
+          checkWinUI();
+          return;
+        }
+      }
+    }
+    return; // Don't proceed with normal click logic for revealed cells
+  }
+
+  // If not chording, proceed with normal click
   const revealedCells = revealCellLogic(row, col);
-  revealedCells.forEach(cellData => {
-    const cellEl = document.querySelector(`[data-row="${cellData.row}"][data-col="${cellData.col}"]`);
+  revealedCells.forEach((cellData) => {
+    const cellEl = document.querySelector(
+      `[data-row="${cellData.row}"][data-col="${cellData.col}"]`
+    );
     cellEl.classList.add("revealed");
     if (cellData.value === -1) {
       cellEl.textContent = "💣";
@@ -128,7 +210,9 @@ function handleRightClick(row, col) {
   if (gameOver || revealed[row][col]) return;
 
   if (toggleFlagLogic(row, col)) {
-    const cellEl = document.querySelector(`[data-row="${row}"][data-col="${col}"]`);
+    const cellEl = document.querySelector(
+      `[data-row="${row}"][data-col="${col}"]`
+    );
     if (flagged[row][col]) {
       cellEl.classList.add("flagged");
       cellEl.textContent = "🚩";
@@ -195,7 +279,9 @@ function calculateCellSize() {
   const minCellSize = 18;
   const padding = 40; // Account for container padding
 
-  const containerWidth = gameBoardEl.parentElement.clientWidth - padding;
+  // Using window.innerWidth instead of parentElement.clientWidth for better mobile support
+  const viewportWidth = window.innerWidth;
+  const containerWidth = Math.min(viewportWidth - padding, 640); // Don't exceed max container width
   const containerHeight = window.innerHeight - 300; // Reserve space for header and controls
 
   const cellWidthByContainer = Math.floor(containerWidth / gameConfig.cols);
