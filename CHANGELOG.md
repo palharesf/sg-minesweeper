@@ -1,3 +1,6 @@
+## version 1.3.3 - 2025-10-30
+- Hotfix for black text inherited from body cascading to the hidden-content class
+
 ## version 1.3.2 - 2025-10-30
 - Updated game rules to explain question marks
 
