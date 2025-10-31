@@ -117,6 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
     shareableLinkInput.value = shareableLink;
     generatedLinkPanel.style.display = "block";
     shareableLinkInput.select();
+    copyLinkBtn.textContent = "Copy Link";
   });
 
   copyLinkBtn.addEventListener("click", () => {
