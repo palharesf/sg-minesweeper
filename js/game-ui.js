@@ -97,6 +97,25 @@ function renderBoard() {
       cell.dataset.row = i;
       cell.dataset.col = j;
 
+      // Restore cell state based on current game state
+      if (revealed[i] && revealed[i][j]) {
+        cell.classList.add("revealed");
+        const boardValue = getBoard()[i][j];
+        if (boardValue === -1) {
+          cell.textContent = "💣";
+          cell.classList.add("mine");
+        } else if (boardValue > 0) {
+          cell.textContent = boardValue;
+          cell.classList.add(`number-${boardValue}`);
+        }
+      } else if (flagged[i] && flagged[i][j]) {
+        cell.classList.add("flagged");
+        cell.textContent = "🚩";
+      } else if (questionMark[i] && questionMark[i][j]) {
+        cell.classList.add("question-mark");
+        cell.textContent = "❓";
+      }
+
       cell.addEventListener("click", () => handleCellClick(i, j));
       cell.addEventListener("contextmenu", (e) => {
         e.preventDefault();
