@@ -144,8 +144,9 @@ function handleCellClick(row, col) {
 
     // Only chord on numbered cells
     if (cellValue > 0) {
-      // Count adjacent flags
+      // Count adjacent flags and check for question marks
       let adjacentFlags = 0;
+      let hasQuestionMark = false;
       const neighbors = [];
 
       for (let i = -1; i <= 1; i++) {
@@ -165,12 +166,15 @@ function handleCellClick(row, col) {
             if (flagged[newRow][newCol]) {
               adjacentFlags++;
             }
+            if (questionMark[newRow][newCol]) {
+              hasQuestionMark = true;
+            }
           }
         }
       }
 
-      // If flag count matches the number, reveal all unrevealed neighbors
-      if (adjacentFlags === cellValue) {
+      // Only chord if flag count matches AND there are no question marks
+      if (adjacentFlags === cellValue && !hasQuestionMark) {
         neighbors.forEach(({ row: nRow, col: nCol }) => {
           if (!revealed[nRow][nCol] && !flagged[nRow][nCol]) {
             const revealedCells = revealCellLogic(nRow, nCol);
