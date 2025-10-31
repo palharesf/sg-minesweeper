@@ -1,3 +1,9 @@
+## version 1.3.4 - 2025-10-31
+- Bugfix for rendering engine failing to load game state (refat17 and s4k1s)
+- Bugfix for visual anomaly when chording a question mark (Leeuw96)
+    - Chording is now disabled around question marks
+- Bugfix for "Copy Link"/"Link Copied!" button text not updating (PoeticKatana)
+
 ## version 1.3.3 - 2025-10-30
 - Hotfix for black text inherited from body cascading to the hidden-content class
 
@@ -16,8 +22,8 @@
     - Chording with a misplaced flag will detonate a mine
 - Updated game rules to explain chording
 - Visual change to reduce gap between cells
-- Added reactive styles to the game board
-- Added resizing functionality for mobile device orientation change
+- Added reactive styles to the game board (RobbyRatpoison)
+- Added resizing functionality for mobile device orientation change (RobbyRatpoison)
 
 ## version 1.2.0 - 2025-10-29
 - Implemented localStorage strategy to track solved puzzles and display them on the game page
