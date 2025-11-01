@@ -1,3 +1,6 @@
+## version 1.4.2 - 2025-11-01
+- Bugfix for chording on question marks leaving visual anomalies (borger)
+
 ## version 1.4.1 - 2025-11-01
 - AdSense script implemented
 
