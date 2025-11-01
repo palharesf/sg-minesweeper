@@ -129,7 +129,7 @@ function renderBoard() {
 
 function handleCellClick(row, col) {
   // Prevents clicks if game is over or if the cell is already flagged
-  if (gameOver || flagged[row][col]) return;
+  if (gameOver || flagged[row][col] || questionMark[row][col]) return;
 
   // Place mines on first click
   if (isFirstClick()) {
