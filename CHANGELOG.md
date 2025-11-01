@@ -1,3 +1,6 @@
+## version 1.4.1 - 2025-11-01
+- AdSense script implemented
+
 ## version 1.4.0 - 2025-10-31
 - AdSense setup
 
