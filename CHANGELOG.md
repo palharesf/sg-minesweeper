@@ -1,3 +1,6 @@
+## version 1.4.0 - 2025-10-31
+- AdSense setup
+
 ## version 1.3.4 - 2025-10-31
 - Bugfix for rendering engine failing to load game state (refat17 and s4k1s)
 - Bugfix for visual anomaly when chording a question mark (Leeuw96)
