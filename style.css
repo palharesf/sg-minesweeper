@@ -82,13 +82,14 @@ button:hover {
 
 #game-board {
   display: grid;
-  gap: 1px;
-  /* Darker grid lines between cells */
+  gap: 0px; /* Darker grid lines between cells */
   background: #1a1d23;
   padding: 2px;
   border-radius: 5px;
   margin: 0 auto;
   width: fit-content;
+  max-width: 100%;  /* Prevents overflow */
+  overflow: hidden; /* Clips any unexpected overflow */
 }
 
 .cell {
