@@ -316,7 +316,8 @@ button.restart.visible {
 
 /* Rules Container Styles */
 .rules-container {
-  width: 600px;
+  width: 100%;
+  max-width: 640px;
   cursor: pointer;
 }
 
