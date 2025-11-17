@@ -1,3 +1,8 @@
+## version 1.4.3 - 2025-11-17
+- Bugfix for cell size calculation, preventing board game to overflow
+- Removed gap between cells on game board
+- Updated game rules to reflect question marks
+
 ## version 1.4.2 - 2025-11-01
 - Bugfix for chording on question marks leaving visual anomalies (borger)
 

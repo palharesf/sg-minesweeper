@@ -307,10 +307,12 @@ function calculateCellSize() {
   const minCellSize = 18;
   const padding = 40; // Account for container padding
 
-  // Using window.innerWidth instead of parentElement.clientWidth for better mobile support
-  const viewportWidth = window.innerWidth;
-  const containerWidth = Math.min(viewportWidth - padding, 640); // Don't exceed max container width
-  const containerHeight = window.innerHeight - 300; // Reserve space for header and controls
+  // Get the actual container width instead of window width
+  const containerEl = gameBoardEl.parentElement;
+  const containerWidth = containerEl.clientWidth - padding;
+
+  const reservedHeight = 300; // Reserve space for header and controls
+  const containerHeight = window.innerHeight - reservedHeight;
 
   const cellWidthByContainer = Math.floor(containerWidth / gameConfig.cols);
   const cellHeightByContainer = Math.floor(containerHeight / gameConfig.rows);
