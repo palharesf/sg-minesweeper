@@ -89,7 +89,7 @@ button:hover {
   margin: 0 auto;
   width: fit-content;
   max-width: 100%;  /* Prevents overflow */
-  overflow: hidden; /* Clips any unexpected overflow */
+  overflow: auto; /* Clips any unexpected overflow */
 }
 
 .cell {
