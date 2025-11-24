@@ -1,3 +1,6 @@
+## version 1.4.4 - 2025-11-24
+- Bugfix for game board overflow on mobile devices without ability to scroll screen
+
 ## version 1.4.3 - 2025-11-17
 - Bugfix for cell size calculation, preventing board game to overflow
 - Removed gap between cells on game board
