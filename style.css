@@ -183,7 +183,8 @@ button:hover {
 button.restart.visible {
   display: flex;
   align-items: center;
-  justify-content: center
+  justify-content: center;
+  margin-top: 15px;
 }
 
 .hidden-content h2 {
