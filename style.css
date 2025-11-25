@@ -14,6 +14,7 @@ body {
   /* SteamGifts uses a dark, nearly black background instead of bright gradients */
   background: #1e2329;
   padding: 20px;
+  padding-top: 80px; /* Adjust for fixed header height */
   position: relative;
   color: #c5c5c5;
 }
@@ -27,7 +28,7 @@ body {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   width: 100%;
   max-width: 640px;
-  margin-bottom: 60px;
+  margin-bottom: 30px;
   /* SteamGifts uses subtle borders to define container edges */
   border: 1px solid #1a1d23;
 }
@@ -37,6 +38,12 @@ h1 {
   /* Light text color for dark background - SteamGifts uses off-white tones */
   color: #d4d4d4;
   margin-bottom: 20px;
+}
+
+.header-section {
+  margin-bottom: 20px;
+  margin-top: 20px;
+  padding-top: 20px;
 }
 
 .info-panel {
@@ -215,7 +222,6 @@ button.restart.visible {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  margin-top: 20px;
 }
 
 .creator-form label {
@@ -289,9 +295,9 @@ button.restart.visible {
   background: #6bc5de;
 }
 
-/* Footer Styles */
+/* Footer and Header Styles */
 .footer {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
@@ -302,6 +308,53 @@ button.restart.visible {
   color: #999;
   font-size: 12px;
   border-top: 1px solid #23272d;
+  z-index: 1000; /* Ensure footer is above other content */
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #1a1d23; /* Same as footer background */
+  color: #d4d4d4;
+  padding: 15px 20px; /* Slightly larger padding than footer */
+  border-bottom: 1px solid #23272d; /* Same as footer border */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+  z-index: 1000; /* Ensure header is above other content */
+  display: flex;
+  justify-content: center; /* Center the content horizontally */
+  align-items: center; /* Center the content vertically */
+  height: 60px; /* Fixed height for the header */
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 640px; /* Match container max-width */
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 1.5em; /* Slightly larger than default h1 in body */
+  color: #d4d4d4;
+}
+
+.header .new-game-link {
+  margin-top: 5px;
+  font-size: 0.8em; /* Adjust font size */
+}
+
+.header .new-game-link a {
+  color: #5cb3cc; /* Match footer link color */
+  text-decoration: none;
+}
+
+.header .new-game-link a:hover {
+  color: #6bc5de; /* Match footer link hover color */
+  text-decoration: underline;
 }
 
 .footer a {
