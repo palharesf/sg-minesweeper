@@ -42,6 +42,13 @@ restartButtonEl.addEventListener("click", () =>
   initGameUI(gameConfig, rewardLink)
 );
 
+// Keyboard listener for R key - stored so we can add/remove it
+function handleRestartKeypress(e) {
+  if (e.key === "r" || e.key === "R") {
+    initGameUI(gameConfig, rewardLink);
+  }
+}
+
 document
   .getElementById("rules-container")
   .addEventListener("click", function () {
@@ -75,6 +82,9 @@ export function initGameUI(config, reward) {
 
   // Re-enable the game board in case it was disabled
   enableGameBoard();
+
+  // Remove the R key listener in case it was active from a previous loss
+  document.removeEventListener("keydown", handleRestartKeypress);
 
   // Check if this puzzle was already solved
   revealSolvedSecrets();
@@ -283,6 +293,9 @@ function endGameUI(won) {
     messageEl.className = "message lose";
     restartButtonEl.classList.add("visible");
     revealAllMinesUI();
+
+    // Add the R key listener only when the player loses
+    document.addEventListener("keydown", handleRestartKeypress);
   }
 }
 
