@@ -1,3 +1,8 @@
+## version 1.4.5 - 2025-11-25
+- Adjustments for fixed header and footer
+- Styling updated for Restart Button
+- Press R to restart
+
 ## version 1.4.4 - 2025-11-24
 - Bugfix for game board overflow on mobile devices without ability to scroll screen
 
