@@ -1,3 +1,7 @@
+## version 1.5.0 - 2026-01-13
+- Implemented "Invert Controls" toggle
+- General design improvements to the header (to accomodate the toggle) and body
+
 ## version 1.4.5 - 2025-11-25
 - Adjustments for fixed header and footer
 - Styling updated for Restart Button
