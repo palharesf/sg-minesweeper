@@ -1,3 +1,6 @@
+## version 1.5.1 - 2026-01-13
+- Bugfix for the cases where the decodedString contained commas, which was tripping up the split(",") function
+
 ## version 1.5.0 - 2026-01-13
 - Implemented "Invert Controls" toggle
 - General design improvements to the header (to accomodate the toggle) and body
