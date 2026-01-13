@@ -4,18 +4,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SG Minesweeper - Play</title>
-    <meta name="google-adsense-account" content="ca-pub-6255805898920780">
+    <meta name="google-adsense-account" content="ca-pub-6255805898920780" />
   </head>
   <body>
     <header class="header">
-      <div class="header-section">
-        <h1>🎮 SG Minesweeper - Play 💣</h1>
+      <div class="header-content">
+        <div class="header-title">
+          <h1 class="app-title">🎮 SG Minesweeper 💣</h1>
+        </div>
+
         <div class="header-controls">
-          <h3 class="new-game-link"><a href="index.html">Create a new game</a></h3>
-          <div class="toggle-container">
-            <label for="invert-controls">Invert Controls</label>
-            <input type="checkbox" id="invert-controls">
-          </div>
+          <a class="new-game-link" href="index.html">New game</a>
+
+          <label class="toggle-container">
+            <input type="checkbox" id="invert-controls" />
+            <span>Invert controls</span>
+          </label>
         </div>
       </div>
     </header>
@@ -33,7 +37,9 @@
 
       <div class="message" id="message"></div>
 
-      <button class="restart" id="restart-button">Restart (or press "R")</button>
+      <button class="restart" id="restart-button">
+        Restart (or press "R")
+      </button>
 
       <div class="hidden-content" id="hidden-content">
         <h2>Congratulations! You Beat It!</h2>
@@ -44,7 +50,9 @@
     <div class="container rules-container" id="rules-container">
       <h3>Game Rules: (click to reveal)</h3>
       <ul id="rules-list">
-        <li>Cells can be empty, contain a number, a mine, or a question mark.</li>
+        <li>
+          Cells can be empty, contain a number, a mine, or a question mark.
+        </li>
         <li>
           That number represents the amount of mines adjacent to the cell
           (including diagonals).
@@ -71,8 +79,11 @@
     <script src="./js/game-logic.js" type="module"></script>
     <script src="./js/game-ui.js" type="module"></script>
     <script src="./js/game-init.js" type="module"></script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6255805898920780"
-     crossorigin="anonymous"></script>
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6255805898920780"
+      crossorigin="anonymous"
+    ></script>
   </body>
   <footer>
     <div class="footer">
