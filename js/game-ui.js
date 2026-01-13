@@ -36,11 +36,20 @@ const timerEl = document.getElementById("timer");
 const messageEl = document.getElementById("message");
 const hiddenContentEl = document.getElementById("hidden-content");
 const restartButtonEl = document.getElementById("restart-button");
+const invertControlsCheckbox = document.getElementById("invert-controls");
+
+// State for control inversion
+let invertControls = false;
 
 // Event listeners
 restartButtonEl.addEventListener("click", () =>
   initGameUI(gameConfig, rewardLink)
 );
+
+// Invert controls toggle
+invertControlsCheckbox.addEventListener("change", (e) => {
+  invertControls = e.target.checked;
+});
 
 // Keyboard listener for R key - stored so we can add/remove it
 function handleRestartKeypress(e) {
@@ -262,6 +271,27 @@ function flagCell(row, col) {
     }
     updateFlagCountUI();
     checkWinUI();
+  }
+}
+
+// Event handlers that check inversion state
+function handleCellClick(row, col) {
+  if (invertControls) {
+    // Inverted: left click does flag logic
+    flagCell(row, col);
+  } else {
+    // Normal: left click does reveal logic
+    revealCell(row, col);
+  }
+}
+
+function handleRightClick(row, col) {
+  if (invertControls) {
+    // Inverted: right click does reveal logic
+    revealCell(row, col);
+  } else {
+    // Normal: right click does flag logic
+    flagCell(row, col);
   }
 }
 
