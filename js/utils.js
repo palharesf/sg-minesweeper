@@ -64,11 +64,24 @@ export function decodeGameConfig(hash) {
     const decompressed = pako.inflate(compressed);
     const decodedString = new TextDecoder().decode(decompressed);
     
-    const parts = decodedString.split(",");
-    if (parts.length !== 4) {
+    const firstComma = decodedString.indexOf(",");
+    if (firstComma === -1) return null;
+    const rows = decodedString.substring(0, firstComma);
+
+    const secondComma = decodedString.indexOf(",", firstComma + 1);
+    if (secondComma === -1) return null;
+    const cols = decodedString.substring(firstComma + 1, secondComma);
+
+    const thirdComma = decodedString.indexOf(",", secondComma + 1);
+    if (thirdComma === -1) return null;
+    const mines = decodedString.substring(secondComma + 1, thirdComma);
+
+    const encrypted = decodedString.substring(thirdComma + 1);
+
+    // Check if any part is empty after splitting
+    if (!rows || !cols || !mines || !encrypted) {
       return null;
     }
-    const [rows, cols, mines, encrypted] = parts;
 
     const key = "i-cant-stop-you-but-i-can-slow-you-down";
     let decrypted = "";
