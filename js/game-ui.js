@@ -137,7 +137,8 @@ function renderBoard() {
   }
 }
 
-function handleCellClick(row, col) {
+// Core reveal logic (what left click normally does)
+function revealCell(row, col) {
   // Prevents clicks if game is over or if the cell is already flagged
   if (gameOver || flagged[row][col] || questionMark[row][col]) return;
 
@@ -240,7 +241,8 @@ function handleCellClick(row, col) {
   }
 }
 
-function handleRightClick(row, col) {
+// Core flag logic (what right click normally does)
+function flagCell(row, col) {
   if (gameOver || revealed[row][col]) return;
 
   if (toggleFlagLogic(row, col)) {
