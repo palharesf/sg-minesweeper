@@ -197,24 +197,36 @@ export function revealCellLogic(row, col) {
   return revealedCells;
 }
 
-export function toggleFlagLogic(row, col) {
+export function toggleFlagLogic(row, col, questionMarksDisabled = false) {
   if (revealed[row][col]) return false;
 
-  // Cycle through three states: empty → flagged → question mark → empty
+  // State 1: Empty → Flagged
   if (!flagged[row][col] && !questionMark[row][col]) {
-    // State 1: Empty → Flagged
     flagged[row][col] = true;
-  } else if (flagged[row][col]) {
-    // State 2: Flagged → Question Mark
-    flagged[row][col] = false;
-    questionMark[row][col] = true;
-  } else {
-    // State 3: Question Mark → Empty
-    questionMark[row][col] = false;
+    return true;
   }
 
-  return true;
+  // State 2: Flagged → (Question Mark OR Empty)
+  if (flagged[row][col]) {
+    flagged[row][col] = false;
+
+    // Only enter question-mark state if enabled
+    if (!questionMarksDisabled) {
+      questionMark[row][col] = true;
+    }
+
+    return true;
+  }
+
+  // State 3: Question Mark → Empty
+  if (questionMark[row][col]) {
+    questionMark[row][col] = false;
+    return true;
+  }
+
+  return false;
 }
+
 
 export function checkWinLogic() {
   let revealedCount = 0;

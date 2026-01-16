@@ -250,25 +250,30 @@ function revealCell(row, col) {
   }
 }
 
-// Core flag logic (what right click normally does)
+// Core flag logic
 function flagCell(row, col) {
+  const questionMarksDisabled = areQuestionMarksDisabled();
+
   if (gameOver || revealed[row][col]) return;
 
-  if (toggleFlagLogic(row, col)) {
+  if (toggleFlagLogic(row, col, questionMarksDisabled)) {
     const cellEl = document.querySelector(
       `[data-row="${row}"][data-col="${col}"]`
     );
+
     if (flagged[row][col]) {
       cellEl.classList.add("flagged");
+      cellEl.classList.remove("question-mark");
       cellEl.textContent = "🚩";
-    } else if (questionMark[row][col]) {
+    } else if (questionMark[row][col] && !questionMarksDisabled) {
       cellEl.classList.remove("flagged");
       cellEl.classList.add("question-mark");
       cellEl.textContent = "❓";
     } else {
-      cellEl.classList.remove("question-mark");
+      cellEl.classList.remove("flagged", "question-mark");
       cellEl.textContent = "";
     }
+
     updateFlagCountUI();
     checkWinUI();
   }
