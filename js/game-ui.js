@@ -36,7 +36,11 @@ const timerEl = document.getElementById("timer");
 const messageEl = document.getElementById("message");
 const hiddenContentEl = document.getElementById("hidden-content");
 const restartButtonEl = document.getElementById("restart-button");
-const invertControlsCheckbox = document.getElementById("invert-controls");
+const invertClickChecbox = document.getElementById("invert-controls");
+const disableQuestionMark = document.getElementById("disable-question-marks");
+const settingsButton = document.querySelector(".settings-button");
+const settingsDropdown = document.querySelector(".settings-dropdown");
+const settingsContainer = document.querySelector(".settings");
 
 // State for control inversion
 let invertControls = false;
