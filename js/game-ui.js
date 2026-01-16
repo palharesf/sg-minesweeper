@@ -45,7 +45,24 @@ const settingsContainer = document.querySelector(".settings");
 // State for control inversion
 let invertControls = false;
 
-// Event listeners
+// localStorage keys
+const STORAGE_KEYS = {
+  invertControls: "sgms_invert_controls",
+  disableQuestionMarks: "sgms_disable_question_marks",
+};
+
+/////////////////////
+// Helper function //
+/////////////////////
+
+function areQuestionMarksDisabled() {
+  return disableQuestionMark?.checked;
+}
+
+/////////////////////
+// Event listeners //
+/////////////////////
+
 restartButtonEl.addEventListener("click", () =>
   initGameUI(gameConfig, rewardLink)
 );
