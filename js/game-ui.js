@@ -166,6 +166,7 @@ export function initGameUI(config, reward) {
 // Private Functions
 function renderBoard() {
   gameBoardEl.innerHTML = "";
+  const questionMarksDisabled = areQuestionMarksDisabled();
 
   const cellSize = calculateCellSize();
   gameBoardEl.style.gridTemplateColumns = `repeat(${gameConfig.cols}, ${cellSize}px)`;
@@ -194,7 +195,11 @@ function renderBoard() {
       } else if (flagged[i] && flagged[i][j]) {
         cell.classList.add("flagged");
         cell.textContent = "🚩";
-      } else if (questionMark[i] && questionMark[i][j]) {
+      } else if (
+        questionMark[i] &&
+        questionMark[i][j] &&
+        !questionMarksDisabled
+      ) {
         cell.classList.add("question-mark");
         cell.textContent = "❓";
       }
