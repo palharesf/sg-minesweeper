@@ -217,8 +217,15 @@ function renderBoard() {
 
 // Core reveal logic (what left click normally does)
 function revealCell(row, col) {
+  const questionMarksDisabled = areQuestionMarksDisabled();
+
   // Prevents clicks if game is over or if the cell is already flagged
-  if (gameOver || flagged[row][col] || questionMark[row][col]) return;
+  if (
+    gameOver ||
+    flagged[row][col] ||
+    (questionMark[row][col] && !questionMarksDisabled)
+  )
+    return;
 
   // Place mines on first click
   if (isFirstClick()) {
@@ -255,7 +262,7 @@ function revealCell(row, col) {
             if (flagged[newRow][newCol]) {
               adjacentFlags++;
             }
-            if (questionMark[newRow][newCol]) {
+            if (questionMark[newRow][newCol] && !questionMarksDisabled) {
               hasQuestionMark = true;
             }
           }
@@ -284,13 +291,8 @@ function revealCell(row, col) {
         });
 
         // Check game state after chording
-        if (gameOver) {
-          endGameUI(gameWon);
-          return;
-        } else {
-          checkWinUI();
-          return;
-        }
+        gameOver ? endGameUI(gameWon) : checkWinUI();
+        return;
       }
     }
     return; // Don't proceed with normal click logic for revealed cells
@@ -312,11 +314,8 @@ function revealCell(row, col) {
     }
   });
 
-  if (gameOver) {
-    endGameUI(gameWon);
-  } else {
-    checkWinUI();
-  }
+  // Check game state after revealing
+  gameOver ? endGameUI(gameWon) : checkWinUI();
 }
 
 // Core flag logic
