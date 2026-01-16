@@ -586,6 +586,26 @@ button.restart.visible {
   align-items: center;      /* KEY */
   gap: 6px;
 }
+/* DROPDOWN */
+.settings-dropdown {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  min-width: 200px;
+  background: #1f232a;
+  border-radius: 8px;
+  padding: 10px 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 100;
+}
+
+.settings-dropdown.open {
+  display: flex;
+}
 
 @media (max-width: 480px) {
   .header-content {
