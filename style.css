@@ -327,22 +327,19 @@ button.restart.visible {
 }
 
 .header-title {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  flex: 0 1 auto;
   display: flex;
-  align-items: center;
+  justify-content: center;
 }
 
 .header-content {
-  position: relative;
-  width: 100%;
-  max-width: 960px;
-  padding: 0 20px;
   display: flex;
   align-items: center;
-  justify-content: flex-end; /* controls to the right */
+  justify-content: space-between; /* Pushes content to the edges */
+  width: 100%;
+  max-width: 960px;
+  padding: 0 15px;
+  height: 100%;
 }
 
 .header::after {
