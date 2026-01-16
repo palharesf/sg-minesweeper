@@ -16,10 +16,23 @@
         <div class="header-controls">
           <a class="new-game-link" href="index.html">New game</a>
 
-          <label class="toggle-container">
-            <input type="checkbox" id="invert-controls" />
-            <span>Invert controls</span>
-          </label>
+          <div class="settings">
+            <button class="settings-button" aria-label="Settings" type="button">
+              ⚙️
+            </button>
+
+            <div class="settings-dropdown">
+              <label class="toggle-container">
+                <input type="checkbox" id="invert-controls" />
+                <span>Invert left and right click</span>
+              </label>
+
+              <label class="toggle-container">
+                <input type="checkbox" id="disable-question-marks" />
+                <span>Disable question marks</span>
+              </label>
+            </div>
+          </div>
         </div>
       </div>
     </header>
