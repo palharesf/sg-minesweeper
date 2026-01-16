@@ -134,6 +134,14 @@ window.addEventListener("resize", () => {
   }, 250);
 });
 
+// Load saved settings
+invertControls = localStorage.getItem(STORAGE_KEYS.invertControls) === "true";
+invertClickChecbox.checked = invertControls;
+
+const savedQuestionMarksDisabled =
+  localStorage.getItem(STORAGE_KEYS.disableQuestionMarks) === "true";
+disableQuestionMark.checked = savedQuestionMarksDisabled;
+
 // Public Functions
 export function initGameUI(config, reward) {
   initGameLogic(config, reward);
