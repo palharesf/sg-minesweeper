@@ -541,14 +541,14 @@ button.restart.visible {
 .header-controls {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 8px;
+  flex-shrink: 0; /* Prevents buttons from squishing */
 }
-
 
 .toggle-container {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   cursor: pointer;
   color: #b0b0b0;
   font-size: 0.85rem;
@@ -556,6 +556,7 @@ button.restart.visible {
 
 .toggle-container input {
   accent-color: #5cb3cc;
+  transform: scale(1.1);
 }
 
 .toggle-container label {
