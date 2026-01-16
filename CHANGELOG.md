@@ -1,3 +1,9 @@
+## version 1.5.2 - 2026-01-16
+- Implemented a Settings Icon on the header, containing all toggles
+- Implemented a toggle for disabling question marks
+- Implemented localStorage to persist toggle selections
+- Visual improvements for mobile responsiveness
+
 ## version 1.5.1 - 2026-01-13
 - Bugfix for the cases where the decodedString contained commas, which was tripping up the split(",") function
 
