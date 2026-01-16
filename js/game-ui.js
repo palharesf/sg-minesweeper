@@ -50,12 +50,47 @@ restartButtonEl.addEventListener("click", () =>
   initGameUI(gameConfig, rewardLink)
 );
 
-// Invert controls toggle
-invertControlsCheckbox.addEventListener("change", (e) => {
-  invertControls = e.target.checked;
+settingsButton.addEventListener("click", (e) => {
+  e.stopPropagation();
+  settingsDropdown.classList.toggle("open");
 });
 
-// Keyboard listener for R key - stored so we can add/remove it
+document.addEventListener("click", (e) => {
+  if (!settingsContainer.contains(e.target)) {
+    settingsDropdown.classList.remove("open");
+  }
+});
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    settingsDropdown.classList.remove("open");
+  }
+});
+
+// Invert controls toggle
+invertClickChecbox.addEventListener("change", (e) => {
+  invertControls = e.target.checked;
+  localStorage.setItem(STORAGE_KEYS.invertControls, invertControls);
+});
+
+// Disable question mark toggle
+disableQuestionMark.addEventListener("change", (e) => {
+  const questionMarksDisabled = e.target.checked;
+
+  localStorage.setItem(
+    STORAGE_KEYS.disableQuestionMarks,
+    questionMarksDisabled
+  );
+
+  if (questionMarksDisabled) {
+    document.querySelectorAll(".cell.question-mark").forEach((cell) => {
+      cell.classList.remove("question-mark");
+      cell.textContent = "";
+    });
+  }
+});
+
+// Keyboard listener for R key
 function handleRestartKeypress(e) {
   if (e.key === "r" || e.key === "R") {
     initGameUI(gameConfig, rewardLink);
