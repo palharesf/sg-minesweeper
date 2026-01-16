@@ -586,6 +586,30 @@ button.restart.visible {
   align-items: center;      /* KEY */
   gap: 6px;
 }
+
+/* SETTINGS */
+.settings {
+  position: relative;
+}
+
+.settings-button {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  color: #ddd;
+  padding: 6px;
+}
+
+.settings-button:hover {
+  color: #fff;
+}
+
+.settings-dropdown label + label {
+  border-top: 1px solid #2c313a;
+  padding-top: 8px;
+}
+
 /* DROPDOWN */
 .settings-dropdown {
   position: absolute;
