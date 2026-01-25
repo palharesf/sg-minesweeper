@@ -59,6 +59,37 @@ function areQuestionMarksDisabled() {
   return disableQuestionMark?.checked;
 }
 
+/**
+ * Displays the reward link in the reward-content element.
+ * If the link matches the SteamGifts giveaway pattern, it creates a clickable anchor.
+ * Otherwise, it displays the link as plain text.
+ * @param {string} link - The reward link to display
+ */
+function displayRewardLink(link) {
+  const rewardContentEl = document.getElementById("reward-content");
+  
+  // Clear any existing content
+  rewardContentEl.innerHTML = "";
+  
+  // Check if the link matches the SteamGifts giveaway pattern
+  // Pattern: https://www.steamgifts.com/giveaway/ + exactly 5 alphanumeric characters + anything after
+  const steamGiftsPattern = /^https:\/\/www\.steamgifts\.com\/giveaway\/[a-zA-Z0-9]{5}.*$/;
+  
+  if (steamGiftsPattern.test(link)) {
+    // Create a clickable anchor element
+    const anchor = document.createElement("a");
+    anchor.href = link;
+    anchor.textContent = link;
+    anchor.target = "_blank";
+    anchor.rel = "noopener noreferrer";
+    anchor.className = "reward-link";
+    rewardContentEl.appendChild(anchor);
+  } else {
+    // Display as plain text
+    rewardContentEl.textContent = link;
+  }
+}
+
 /////////////////////
 // Event listeners //
 /////////////////////
@@ -388,7 +419,7 @@ function endGameUI(won) {
     messageEl.textContent = "🎉 You won!";
     messageEl.className = "message win";
     hiddenContentEl.classList.add("visible");
-    document.getElementById("reward-content").textContent = rewardLink;
+    displayRewardLink(rewardLink);
 
     // Mark this puzzle as solved in localStorage
     const currentPuzzleId = encodeGameConfig(gameConfig, rewardLink);
@@ -451,7 +482,7 @@ function revealSolvedSecrets() {
     messageEl.textContent = "✨ Previously solved! Secret revealed below.";
     messageEl.className = "message win";
     hiddenContentEl.classList.add("visible");
-    document.getElementById("reward-content").textContent = rewardLink;
+    displayRewardLink(rewardLink);
 
     // Enable the replay button and disable the game board (so the only way to play it again is by resetting it)
     disableGameBoard();
