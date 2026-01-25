@@ -1,14 +1,17 @@
+## version 1.5.3 - 2026-01-25
+- Secrets following the format 'https://www.steamgifts.com/giveaway/' + '5 alphanumeric characters' + 'anything after' are now clickable URLs (stogle)
+
 ## version 1.5.2 - 2026-01-16
 - Implemented a Settings Icon on the header, containing all toggles
-- Implemented a toggle for disabling question marks
+- Implemented a toggle for disabling question marks (Greativity)
 - Implemented localStorage to persist toggle selections
 - Visual improvements for mobile responsiveness
 
 ## version 1.5.1 - 2026-01-13
-- Bugfix for the cases where the decodedString contained commas, which was tripping up the split(",") function
+- Bugfix for the cases where the decodedString contained commas, which was tripping up the split(",") function (86maylin)
 
 ## version 1.5.0 - 2026-01-13
-- Implemented "Invert Controls" toggle
+- Implemented "Invert Controls" toggle (MouseWithBeer)
 - General design improvements to the header (to accomodate the toggle) and body
 
 ## version 1.4.5 - 2025-11-25
